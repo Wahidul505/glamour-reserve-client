@@ -1,9 +1,11 @@
+import Navbar from "@/components/ui/Navbar/Navbar";
 import React from "react";
 
 const MainPage = () => {
   return (
     <div>
-      <h1>this is home page</h1>
+      <Navbar />
+      this is home page
     </div>
   );
 };

@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface IMeta {
   page: number;
   limit: number;
@@ -18,4 +20,8 @@ export type IResponseError = {
 export type IGenericErrorMessage = {
   path: string | number;
   message: string;
+};
+
+export type IChildrenProps = {
+  children: React.ReactNode | React.ReactElement;
 };

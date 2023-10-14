@@ -1,11 +1,8 @@
 import React from "react";
 import StyledComponentsRegistry from "./AntdRegistry";
+import { IChildrenProps } from "@/types/common";
 
-interface IProps {
-  children: React.ReactElement | React.ReactNode;
-}
-
-const Providers = ({ children }: IProps) => {
+const Providers = ({ children }: IChildrenProps) => {
   return <StyledComponentsRegistry>{children}</StyledComponentsRegistry>;
 };
 
