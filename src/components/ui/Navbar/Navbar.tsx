@@ -20,21 +20,22 @@ const Navbar = ({
 
   return (
     <Layout className="layout">
-      <Header className="flex items-center">
+      <Header className="flex items-center bg-black">
         <Content>
           <Link href="/">
-            <Title className="m-0 text-white">Doctors Portal</Title>
+            <Title className="m-0 text-white font-thin text-3xl">
+              Glamour Reserve
+            </Title>
           </Link>
         </Content>
         <Menu
-          className="lg:block hidden"
+          className="lg:block hidden bg-black text-white"
           disabledOverflow
-          theme="dark"
           mode="horizontal"
           selectedKeys={[pathname]}
         >
           {items?.map((item) => (
-            <Menu.Item key={item.href}>
+            <Menu.Item key={item.href} className="hover:text-white">
               <Link href={item.href}>{item.label}</Link>
             </Menu.Item>
           ))}
