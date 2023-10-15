@@ -15,7 +15,10 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["dark"],
+  },
   corePlugins: {
     preflight: false,
   },

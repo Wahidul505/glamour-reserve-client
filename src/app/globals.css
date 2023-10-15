@@ -1,9 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Cantarell&family=Quicksand:wght@300&display=swap");
 
 * {
   margin: 0px;
   padding: 0px;
   box-shadow: none;
+  font-family: "Cantarell", sans-serif;
+  /* font-family: "Quicksand", sans-serif; */
+}
+
+.active {
+  color: white;
 }
