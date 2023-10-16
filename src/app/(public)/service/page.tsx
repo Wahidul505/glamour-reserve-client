@@ -1,19 +1,92 @@
 "use client";
 import LoadingPage from "@/app/loading";
-import Category from "@/components/ui/Category/Category";
-import { useCategoriesQuery } from "@/redux/api/categoryApi";
-import React from "react";
+import ServiceCard from "@/components/ui/Service/ServiceCard";
+import { useDebounce } from "@/hooks/useDebounce";
+import { useServicesQuery } from "@/redux/api/serviceApi";
+import React, { useState } from "react";
+import { BiSolidUpArrow } from "react-icons/bi";
+import { BiSolidDownArrow } from "react-icons/bi";
+import { BsSearch } from "react-icons/bs";
 
 const ServicePage = () => {
-  const { data, isLoading } = useCategoriesQuery({ limit: 100 });
+  const query: Record<string, any> = {};
+  const [sortBy, setSortBy] = useState<string>("");
+  const [sortOrder, setSortOrder] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
+  query["sortBy"] = sortBy;
+  query["sortOrder"] = sortOrder;
+  query["search"] = searchTerm;
+
+  const debounce = useDebounce(searchTerm, 600);
+
+  if (!!debounce) query["searchTerm"] = searchTerm;
+
+  const { data, isLoading } = useServicesQuery({ ...query });
   if (isLoading) return <LoadingPage />;
-  console.log(data);
+
+  const handleSort = (order: string) => {
+    setSortBy("price");
+    setSortOrder(order);
+  };
+
   return (
     <div>
-      {data &&
-        data?.map((category: any) => (
-          <Category key={category.id} category={category} />
-        ))}
+      {/* search bar  */}
+      <div className="lg:px-28 px-4">
+        <h1 className="mb-2">Search your Suits</h1>
+        <div className="flex">
+          <form className="relative">
+            <input
+              type="text"
+              name="search"
+              placeholder="Search"
+              className="border border-gray-700 h-11 focus:border-gray-700 px-2 text-lg"
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            {/* <button
+              type="submit"
+              className="text-2xl border-none bg-transparent absolute right-3 top-0 bottom-0  flex items-center cursor-pointer"
+            >
+              <BsSearch />
+            </button> */}
+          </form>
+          <label className="swap ml-3">
+            {/* this hidden checkbox controls the state */}
+            <input type="checkbox" />
+
+            {/* volume on icon */}
+            <div
+              className="swap-on fill-current flex items-center"
+              onClick={() => handleSort("asc")}
+            >
+              Price
+              <BiSolidUpArrow />
+            </div>
+
+            {/* volume off icon */}
+            <div
+              className="swap-off fill-current flex items-center"
+              onClick={() => handleSort("desc")}
+            >
+              Price
+              <BiSolidDownArrow />
+            </div>
+          </label>
+        </div>
+      </div>
+      {/* all services  */}
+      <div className="lg:px-28 px-4 py-20 mb-8 lg:mb-12 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
+        {data &&
+          data?.map((service: any) => (
+            <ServiceCard
+              key={service.id}
+              service={service}
+              theme="light"
+              categoryTitle={true}
+            />
+          ))}
+      </div>
     </div>
   );
 };

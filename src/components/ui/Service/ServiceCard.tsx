@@ -3,7 +3,13 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-const ServiceCard = ({ service }: { service: any }) => {
+interface IProps {
+  service: any;
+  theme: string;
+  categoryTitle?: boolean;
+}
+
+const ServiceCard = ({ service, theme, categoryTitle = false }: IProps) => {
   const router = useRouter();
   return (
     <div
@@ -18,16 +24,31 @@ const ServiceCard = ({ service }: { service: any }) => {
           height={300}
           className="w-full h-full hover:scale-105 transition-transform duration-700 ease-in-out"
         />
-        <div className="absolute top-0 left-0 bg-black w-20 h-20 flex flex-col items-center justify-center">
-          <div className="text-white text-base lg:text-lg">
-            {service?.price}
+        <div
+          className={`absolute top-0 left-0 w-20 h-20 flex flex-col items-center justify-center ${
+            theme === "dark" ? "bg-black text-white" : "bg-white text-black"
+          }`}
+        >
+          <div className="text-base lg:text-lg">{service?.price}</div>
+          <div
+            className={`text-sm lg:text-base ${
+              theme === "dark" ? "text-gray-400" : "text-gray-700"
+            }`}
+          >
+            TK
           </div>
-          <div className="text-gray-400 text-sm lg:text-base">TK</div>
         </div>
       </div>
-      <div className="text-white lg:text-xl uppercase mt-3">
+      <div
+        className={`lg:text-xl uppercase mt-3 ${
+          theme === "dark" ? "text-white" : "text-black"
+        }`}
+      >
         {service?.title}
       </div>
+      {categoryTitle && service?.category?.title && (
+        <div className="mt-1 text-gray-600">{service?.category?.title}</div>
+      )}
     </div>
   );
 };
