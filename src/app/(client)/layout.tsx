@@ -6,7 +6,7 @@ const ClientLayout = ({ children }: IChildrenProps) => {
   return (
     <>
       <ClientHeader />
-      <div>{children}</div>
+      <div className="mt-32">{children}</div>
     </>
   );
 };

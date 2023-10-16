@@ -21,11 +21,13 @@ interface IProps {
 const Navbar = ({ centerItems, endItems, sidebar }: IProps) => {
   const path = usePathname();
   return (
-    <div className="px-12 bg-base-300 fixed right-0 left-0 top-0">
-      <div className="navbar bg-base-300">
+    <div className="px-12 bg-[#15191E] fixed right-0 left-0 top-0 z-50">
+      <div className="navbar bg-[#15191E]">
         {/* mobile device  */}
         <div className="navbar-start">
-          <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+          <a className="btn btn-ghost normal-case text-xl text-white">
+            daisyUI
+          </a>
         </div>
         {/* desktop  */}
         <div className="navbar-center hidden lg:flex">
@@ -52,7 +54,7 @@ const Navbar = ({ centerItems, endItems, sidebar }: IProps) => {
             <div className="drawer-content flex justify-end pr-4">
               {/* Page content here */}
               <label htmlFor="my-drawer-4" className="drawer-button">
-                <HiMenuAlt3 className="text-3xl cursor-pointer" />
+                <HiMenuAlt3 className="text-3xl cursor-pointer text-gray-300" />
               </label>
             </div>
             <div className="drawer-side">
@@ -68,7 +70,7 @@ const Navbar = ({ centerItems, endItems, sidebar }: IProps) => {
                     aria-label="close sidebar"
                     className="cursor-pointer"
                   >
-                    <CgClose className="text-gray-200 text-xl lg:text-2xl" />
+                    <CgClose className="text-gray-600 text-xl lg:text-2xl" />
                   </label>
                 </div>
                 {/* Sidebar content here */}
@@ -81,7 +83,7 @@ const Navbar = ({ centerItems, endItems, sidebar }: IProps) => {
                       >
                         <Link
                           href={item?.href}
-                          className="no-underline text-lg text-gray-300"
+                          className="no-underline text-lg text-gray-600"
                         >
                           {item?.label}
                         </Link>
@@ -97,7 +99,7 @@ const Navbar = ({ centerItems, endItems, sidebar }: IProps) => {
                       >
                         <Link
                           href={item?.href}
-                          className="no-underline text-lg text-gray-300"
+                          className="no-underline text-lg text-gray-600"
                         >
                           {item?.label}
                         </Link>

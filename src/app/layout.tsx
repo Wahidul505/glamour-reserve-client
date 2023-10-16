@@ -2,6 +2,7 @@ import Providers from "@/lib/Providers";
 import "./globals.css";
 import type { Metadata } from "next";
 import Footer from "@/components/ui/Footer/Footer";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Glamour Reserve",
@@ -16,8 +17,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Providers>{children}</Providers>
+        <div className="min-h-screen">
+          <Providers>{children}</Providers>
+        </div>
         <Footer />
+        <Toaster position="top-center" reverseOrder={false} />
       </body>
     </html>
   );

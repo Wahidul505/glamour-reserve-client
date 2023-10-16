@@ -6,7 +6,7 @@ const PublicPage = ({ children }: IChildrenProps) => {
   return (
     <>
       <PublicHeader />
-      <div>{children}</div>
+      <div className="pt-32">{children}</div>
     </>
   );
 };
