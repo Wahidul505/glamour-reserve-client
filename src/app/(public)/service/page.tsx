@@ -34,23 +34,16 @@ const ServicePage = () => {
     <div>
       {/* search bar  */}
       <div className="lg:px-28 px-4">
-        <h1 className="mb-2">Search your Suits</h1>
+        <h1 className="mb-3">Search your Suits</h1>
         <div className="flex">
-          <form className="relative">
-            <input
-              type="text"
-              name="search"
-              placeholder="Search"
-              className="border border-gray-700 h-11 focus:border-gray-700 px-2 text-lg"
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            {/* <button
-              type="submit"
-              className="text-2xl border-none bg-transparent absolute right-3 top-0 bottom-0  flex items-center cursor-pointer"
-            >
-              <BsSearch />
-            </button> */}
-          </form>
+          <input
+            type="text"
+            name="search"
+            placeholder="Search"
+            className="border border-gray-700 h-11 focus:border-gray-700 px-2 text-lg"
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+
           <label className="swap ml-3">
             {/* this hidden checkbox controls the state */}
             <input type="checkbox" />

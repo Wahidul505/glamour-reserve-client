@@ -5,7 +5,7 @@ import { useCategoriesQuery } from "@/redux/api/categoryApi";
 import React from "react";
 
 const PackagePage = () => {
-  const { data, isLoading } = useCategoriesQuery({ limit: 1000 });
+  const { data, isLoading } = useCategoriesQuery({ limit: 100 });
   if (isLoading) return <LoadingPage />;
   return (
     <div>

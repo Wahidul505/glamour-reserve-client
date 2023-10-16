@@ -12,7 +12,14 @@ export const serviceApi = baseApi.injectEndpoints({
         params: query,
       }),
     }),
+    // get single service
+    singleService: build.query({
+      query: (id: string) => ({
+        url: `${SERVICE_URL}/${id}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useServicesQuery } = serviceApi;
+export const { useServicesQuery, useSingleServiceQuery } = serviceApi;
