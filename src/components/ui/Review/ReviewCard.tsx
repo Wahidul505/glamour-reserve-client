@@ -16,7 +16,7 @@ const ReviewCard = ({ review }: { review: any }) => {
           width={300}
           height={300}
         />
-        <div className="space-y-1 font-medium dark:text-white">
+        <div className="space-y-1 font-medium text-gray-800">
           <p>{review?.user?.name}</p>
         </div>
       </div>

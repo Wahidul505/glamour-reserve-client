@@ -1,3 +1,4 @@
+import { tagTypes } from "../tagTypes";
 import { baseApi } from "./baseApi";
 
 const SERVICE_URL = "/makeover-service";
@@ -18,6 +19,7 @@ export const serviceApi = baseApi.injectEndpoints({
         url: `${SERVICE_URL}/${id}`,
         method: "GET",
       }),
+      providesTags: [tagTypes.service],
     }),
   }),
 });

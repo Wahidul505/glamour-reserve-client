@@ -15,7 +15,7 @@ interface IProps {
 const FormTextArea = ({
   name,
   type,
-  value = "",
+  value,
   id,
   placeholder,
   validation,

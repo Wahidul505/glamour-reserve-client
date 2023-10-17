@@ -1,10 +1,10 @@
-import PublicHeader from "@/components/view/Header/PublicHeader/PublicHeader";
+import Navbar from "@/components/ui/Navbar/Navbar";
 import React from "react";
 
 const MainPage = () => {
   return (
     <div>
-      <PublicHeader />
+      <Navbar sidebar={true} />
     </div>
   );
 };

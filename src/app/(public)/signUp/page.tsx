@@ -8,7 +8,8 @@ import { useSignUpMutation } from "@/redux/api/authApi";
 import { toast } from "react-hot-toast";
 import { storeUserInfo } from "@/services/auth.service";
 import { useRouter } from "next/navigation";
-import LoadingButton from "@/components/ui/Button/LoadingButton";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { signUpSchema } from "@/schema/auth";
 
 const SignUpPage = () => {
   const [signUp] = useSignUpMutation();
@@ -30,7 +31,7 @@ const SignUpPage = () => {
   return (
     <div>
       <CommonHeading label="Create Your Account" />
-      <Form submitHandler={handleSubmit}>
+      <Form submitHandler={handleSubmit} resolver={yupResolver(signUpSchema)}>
         <div className="border border-black rounded flex flex-col w-2/3 lg:w-1/3 mx-auto">
           <FormInput
             name="name"

@@ -1,3 +1,4 @@
+import { tagTypes } from "../tagTypes";
 import { baseApi } from "./baseApi";
 
 const REVIEW_URL = "/review";
@@ -10,6 +11,7 @@ export const reviewApi = baseApi.injectEndpoints({
         method: "POST",
         data: data,
       }),
+      invalidatesTags: [tagTypes.service],
     }),
   }),
 });

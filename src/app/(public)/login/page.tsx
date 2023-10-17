@@ -8,6 +8,8 @@ import { useSignInMutation } from "@/redux/api/authApi";
 import { useRouter } from "next/navigation";
 import { storeUserInfo } from "@/services/auth.service";
 import { toast } from "react-hot-toast";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { loginSchema } from "@/schema/auth";
 
 const LoginPage = () => {
   const [signIn] = useSignInMutation();
@@ -29,7 +31,7 @@ const LoginPage = () => {
   return (
     <div>
       <CommonHeading label="Login to your Account" />
-      <Form submitHandler={handleSubmit}>
+      <Form submitHandler={handleSubmit} resolver={yupResolver(loginSchema)}>
         <div className="border border-black rounded flex flex-col w-2/3 lg:w-1/3 mx-auto">
           <FormInput
             name="email"

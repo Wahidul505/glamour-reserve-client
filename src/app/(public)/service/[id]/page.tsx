@@ -5,8 +5,10 @@ import Review from "@/components/ui/Review/Review";
 import ReviewCard from "@/components/ui/Review/ReviewCard";
 import { usePostReviewMutation } from "@/redux/api/reviewApi";
 import { useSingleServiceQuery } from "@/redux/api/serviceApi";
+import { getUserInfo } from "@/services/auth.service";
 import Image from "next/image";
 import React, { useState } from "react";
+import { toast } from "react-hot-toast";
 
 const ServiceDetailsPage = ({ params }: { params: any }) => {
   const { id } = params;
@@ -15,8 +17,21 @@ const ServiceDetailsPage = ({ params }: { params: any }) => {
   const { data, isLoading } = useSingleServiceQuery(id as string);
   const [postReview] = usePostReviewMutation();
   if (isLoading) return <LoadingPage />;
+  const { userId } = getUserInfo() as any;
 
-  const handleReviewSubmit = (data: any) => {};
+  const handleReviewSubmit = async (data: any) => {
+    try {
+      if (rating) data.rating = rating;
+      if (userId) data.userId = userId;
+      if (id) data.makeoverServiceId = id;
+      const res = await postReview(data).unwrap();
+      res
+        ? toast.success("Review posted")
+        : toast.error("We already received your review");
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
+  };
 
   return (
     <div>
@@ -92,6 +107,7 @@ const ServiceDetailsPage = ({ params }: { params: any }) => {
           reviewAndRatings={data?.reviewAndRatings}
           submitHandler={handleReviewSubmit}
           setRating={setRating}
+          userId={userId}
         />
       )}
     </div>
