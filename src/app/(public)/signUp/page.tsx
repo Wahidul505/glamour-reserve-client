@@ -4,10 +4,27 @@ import Form from "@/components/ui/Forms/Form";
 import FormInput from "@/components/ui/Forms/FormInput";
 import React from "react";
 import CommonHeading from "@/components/ui/Heading/CommonHeading";
+import { useSignUpMutation } from "@/redux/api/authApi";
+import { toast } from "react-hot-toast";
+import { storeUserInfo } from "@/services/auth.service";
+import { useRouter } from "next/navigation";
+import LoadingButton from "@/components/ui/Button/LoadingButton";
 
 const SignUpPage = () => {
-  const handleSubmit = (data: any) => {
-    console.log(data);
+  const [signUp] = useSignUpMutation();
+  const router = useRouter();
+
+  const handleSubmit = async (data: any) => {
+    try {
+      const result = await signUp({ ...data }).unwrap();
+      storeUserInfo({ accessToken: result });
+      if (result) {
+        router.push("/");
+        toast.success("Account Created");
+      }
+    } catch (error) {
+      toast.error("something went wrong");
+    }
   };
 
   return (

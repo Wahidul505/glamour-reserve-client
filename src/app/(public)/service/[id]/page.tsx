@@ -3,6 +3,7 @@ import LoadingPage from "@/app/loading";
 import AdditionalInformation from "@/components/ui/AdditionalInformation/AdditionalInformation";
 import Review from "@/components/ui/Review/Review";
 import ReviewCard from "@/components/ui/Review/ReviewCard";
+import { usePostReviewMutation } from "@/redux/api/reviewApi";
 import { useSingleServiceQuery } from "@/redux/api/serviceApi";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -12,11 +13,10 @@ const ServiceDetailsPage = ({ params }: { params: any }) => {
   const [layout, setLayout] = useState("additional-info");
   const [rating, setRating] = useState<number | null>(null);
   const { data, isLoading } = useSingleServiceQuery(id as string);
+  const [postReview] = usePostReviewMutation();
   if (isLoading) return <LoadingPage />;
 
-  const handleReviewSubmit = (data: any) => {
-    console.log(data);
-  };
+  const handleReviewSubmit = (data: any) => {};
 
   return (
     <div>

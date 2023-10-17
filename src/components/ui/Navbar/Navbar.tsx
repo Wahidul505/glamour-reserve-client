@@ -1,10 +1,13 @@
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { CgClose } from "react-icons/cg";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getUserInfo, removeUserInfo } from "@/services/auth.service";
+import { authKey } from "@/constants/authToken";
+import LoadingPage from "@/app/loading";
 
 interface IItem {
   key: string;
@@ -19,7 +22,23 @@ interface IProps {
 }
 
 const Navbar = ({ centerItems, endItems, sidebar }: IProps) => {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [currentUserId, setCurrentUserId] = useState("");
   const path = usePathname();
+  const router = useRouter();
+  const { userId } = getUserInfo() as any;
+  const handleLogout = () => {
+    removeUserInfo(authKey);
+    router.push("/login");
+  };
+
+  useEffect(() => {
+    if (userId) setCurrentUserId(userId);
+    setIsLoading(false);
+  }, [userId]);
+
+  if (isLoading) return <LoadingPage />;
+
   return (
     <div className="px-12 bg-[#15191E] fixed right-0 left-0 top-0 z-50">
       <div className="navbar bg-[#15191E]">
@@ -75,6 +94,24 @@ const Navbar = ({ centerItems, endItems, sidebar }: IProps) => {
                 </div>
                 {/* Sidebar content here */}
                 <>
+                  {/* auth items  */}
+                  {/* {!userId &&
+                    authItems &&
+                    authItems?.map((item) => (
+                      <li
+                        className={path == item?.href ? "active" : ""}
+                        key={item?.href}
+                      >
+                        <Link
+                          href={item?.href}
+                          className="no-underline text-lg text-gray-600"
+                        >
+                          {item?.label}
+                        </Link>
+                      </li>
+                    ))} */}
+
+                  {/* end items  */}
                   {endItems &&
                     endItems?.map((item) => (
                       <li
@@ -89,6 +126,7 @@ const Navbar = ({ centerItems, endItems, sidebar }: IProps) => {
                         </Link>
                       </li>
                     ))}
+                  {/* center items  */}
                   {centerItems &&
                     centerItems?.map((item) => (
                       <li
@@ -105,6 +143,18 @@ const Navbar = ({ centerItems, endItems, sidebar }: IProps) => {
                         </Link>
                       </li>
                     ))}
+                  <>
+                    <li>
+                      {userId && (
+                        <button
+                          onClick={() => handleLogout()}
+                          className="border border-[#15191E] bg-white cursor-pointer text-[#15191E] h-10 hover:bg-[#15191E] hover:text-white text-lg lg:text-xl transition-colors duration-200 w-44 mt-4  ml-3"
+                        >
+                          Logout
+                        </button>
+                      )}
+                    </li>
+                  </>
                 </>
               </ul>
             </div>

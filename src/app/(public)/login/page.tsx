@@ -4,10 +4,26 @@ import Form from "@/components/ui/Forms/Form";
 import FormInput from "@/components/ui/Forms/FormInput";
 import React from "react";
 import CommonHeading from "@/components/ui/Heading/CommonHeading";
+import { useSignInMutation } from "@/redux/api/authApi";
+import { useRouter } from "next/navigation";
+import { storeUserInfo } from "@/services/auth.service";
+import { toast } from "react-hot-toast";
 
 const LoginPage = () => {
-  const handleSubmit = (data: any) => {
-    console.log(data);
+  const [signIn] = useSignInMutation();
+  const router = useRouter();
+
+  const handleSubmit = async (data: any) => {
+    try {
+      const result = await signIn({ ...data }).unwrap();
+      storeUserInfo({ accessToken: result });
+      if (result) {
+        router.push("/");
+        toast.success("Logged in");
+      }
+    } catch (error) {
+      toast.error("something went wrong");
+    }
   };
 
   return (
