@@ -12,7 +12,7 @@ interface IProps {
   label?: string;
 }
 
-const FormInput = ({
+const FormTextArea = ({
   name,
   type,
   value = "",
@@ -35,12 +35,11 @@ const FormInput = ({
         control={control}
         name={name}
         render={({ field }) => (
-          <input
-            type={type}
+          <textarea
             placeholder={placeholder}
             {...field}
             value={value ? value : field?.value}
-            className="input input-bordered w-11/12 rounded-none"
+            className="textarea textarea-bordered w-11/12 rounded-none"
           />
         )}
       />
@@ -49,4 +48,4 @@ const FormInput = ({
   );
 };
 
-export default FormInput;
+export default FormTextArea;

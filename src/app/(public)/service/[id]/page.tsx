@@ -1,6 +1,7 @@
 "use client";
 import LoadingPage from "@/app/loading";
 import AdditionalInformation from "@/components/ui/AdditionalInformation/AdditionalInformation";
+import Review from "@/components/ui/Review/Review";
 import ReviewCard from "@/components/ui/Review/ReviewCard";
 import { useSingleServiceQuery } from "@/redux/api/serviceApi";
 import Image from "next/image";
@@ -9,14 +10,19 @@ import React, { useState } from "react";
 const ServiceDetailsPage = ({ params }: { params: any }) => {
   const { id } = params;
   const [layout, setLayout] = useState("additional-info");
+  const [rating, setRating] = useState<number | null>(null);
   const { data, isLoading } = useSingleServiceQuery(id as string);
   if (isLoading) return <LoadingPage />;
+
+  const handleReviewSubmit = (data: any) => {
+    console.log(data);
+  };
 
   return (
     <div>
       <div className="grid lg:grid-cols-2 grid-cols-1">
         {/* image  */}
-        <div className="bg-black lg:p-8 p-4 flex justify-center items-center pt-20">
+        <div className="bg-black lg:px-8 lg:py-16 p-4 flex justify-center items-center pt-20">
           <div>
             <div className="overflow-hidden">
               <Image
@@ -81,13 +87,13 @@ const ServiceDetailsPage = ({ params }: { params: any }) => {
         <AdditionalInformation information={data?.category?.information} />
       )}
 
-      <div className="lg:px-24 px-4">
-        {layout === "review" &&
-          data?.reviewAndRatings &&
-          data?.reviewAndRatings?.map((review: any) => (
-            <ReviewCard key={review?.id} review={review} />
-          ))}
-      </div>
+      {layout === "review" && (
+        <Review
+          reviewAndRatings={data?.reviewAndRatings}
+          submitHandler={handleReviewSubmit}
+          setRating={setRating}
+        />
+      )}
     </div>
   );
 };

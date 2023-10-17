@@ -24,6 +24,8 @@ const Form = ({
 
   const methods = useForm<IFormProps>(formConfig);
   const { handleSubmit, reset } = methods;
+  const watch = methods.watch();
+  console.log(watch);
 
   const onSubmit = (data: any) => {
     submitHandler(data);
