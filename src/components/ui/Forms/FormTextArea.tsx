@@ -43,7 +43,9 @@ const FormTextArea = ({
           />
         )}
       />
-      {errorMessage && <small style={{ color: "red" }}>{errorMessage}</small>}
+      {errorMessage && (
+        <small className="text-red-500 mt-1">{errorMessage}</small>
+      )}
     </div>
   );
 };
