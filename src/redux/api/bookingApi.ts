@@ -1,3 +1,4 @@
+import { tagTypes } from "../tagTypes";
 import { baseApi } from "./baseApi";
 
 const BOOKING_API = "/booking";
@@ -9,6 +10,7 @@ export const bookingApi = baseApi.injectEndpoints({
         url: `${BOOKING_API}/my-booking`,
         method: "GET",
       }),
+      providesTags: [tagTypes.booking],
     }),
     myBooking: build.query({
       query: (id) => ({
@@ -16,7 +18,18 @@ export const bookingApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    cancelMyBooking: build.mutation({
+      query: (id) => ({
+        url: `${BOOKING_API}/${id}/my-booking`,
+        method: "DELETE",
+      }),
+      invalidatesTags: [tagTypes.booking],
+    }),
   }),
 });
 
-export const { useMyBookingQuery, useMyBookingsQuery } = bookingApi;
+export const {
+  useMyBookingQuery,
+  useMyBookingsQuery,
+  useCancelMyBookingMutation,
+} = bookingApi;

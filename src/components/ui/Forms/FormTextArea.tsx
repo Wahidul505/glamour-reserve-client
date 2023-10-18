@@ -10,7 +10,7 @@ interface IProps {
   placeholder?: string;
   validation?: object;
   label?: string;
-  size?: string;
+  size?: "md" | "lg";
 }
 
 const FormTextArea = ({

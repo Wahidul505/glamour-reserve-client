@@ -1,13 +1,29 @@
 "use client";
 import LoadingPage from "@/app/loading";
-import { useMyBookingsQuery } from "@/redux/api/bookingApi";
-import React from "react";
+import BookingDetails from "@/components/ui/Booking/BookingDetails";
+import Modal from "@/components/ui/Modal/Modal";
+import {
+  useCancelMyBookingMutation,
+  useMyBookingsQuery,
+} from "@/redux/api/bookingApi";
+import React, { useState } from "react";
+import { toast } from "react-hot-toast";
+import { CiDatabase } from "react-icons/ci";
 
 const BookingsPage = () => {
+  const [modalOpen, setModalOpen] = useState(true);
   const { data, isLoading } = useMyBookingsQuery(undefined);
+  const [cancelMyBooking] = useCancelMyBookingMutation();
   if (isLoading) return <LoadingPage />;
 
-  console.log(data);
+  const handleDeleteBooking = async (id: string) => {
+    const res = await cancelMyBooking(id);
+    toast.success("Your Booking has been canceled");
+  };
+
+  if (data.length < 1)
+    return <h2 className="text-center">You do not have any Bookings</h2>;
+
   return (
     <div>
       <div className="overflow-x-auto">
@@ -37,10 +53,40 @@ const BookingsPage = () => {
                   </td>
                   <td>{booking?.status}</td>
                   <td className="flex flex-col lg:flex-row">
-                    <button className="btn btn-xs">View</button>
-                    <button className="btn btn-xs btn-error mt-2 lg:mt-0 lg:ml-2">
-                      Cancel
-                    </button>
+                    <Modal
+                      htmlFor={`booking/view/${booking?.id}`}
+                      label="View"
+                      btnSize="btn-xs"
+                      btnTheme="btn"
+                      modalOpen={modalOpen}
+                      setModalOpen={setModalOpen}
+                    >
+                      <BookingDetails data={booking} />
+                    </Modal>
+                    <div className="lg:ml-2">
+                      <Modal
+                        htmlFor={`booking/cancel/${booking?.id}`}
+                        label="Cancel"
+                        btnSize="btn-xs"
+                        btnTheme="btn-error"
+                        modalOpen={modalOpen}
+                        setModalOpen={setModalOpen}
+                      >
+                        <div>
+                          <h3 className="text-center">
+                            Your Booking will be deleted by clicking Delete
+                          </h3>
+                          <div className="flex justify-center mt-3">
+                            <button
+                              onClick={() => handleDeleteBooking(booking?.id)}
+                              className="btn btn-error btn-sm"
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </div>
+                      </Modal>
+                    </div>
                   </td>
                 </tr>
               ))}

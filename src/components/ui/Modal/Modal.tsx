@@ -6,6 +6,8 @@ interface IProps {
   label: string;
   modalOpen: boolean;
   setModalOpen: (arg: boolean) => void;
+  btnSize?: string;
+  btnTheme?: string;
 }
 
 const Modal = ({
@@ -14,13 +16,15 @@ const Modal = ({
   label,
   modalOpen,
   setModalOpen,
+  btnSize = "btn-lg",
+  btnTheme,
 }: IProps) => {
   return (
     <>
       <label
         onClick={() => setModalOpen(true)}
         htmlFor={htmlFor}
-        className="btn mt-4"
+        className={`btn mt-4 ${btnSize} ${btnTheme}`}
       >
         {label}
       </label>

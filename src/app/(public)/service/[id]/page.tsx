@@ -3,11 +3,11 @@ import LoadingPage from "@/app/loading";
 import AdditionalInformation from "@/components/ui/AdditionalInformation/AdditionalInformation";
 import PrimaryButton from "@/components/ui/Button/PrimaryButton";
 import Review from "@/components/ui/Review/Review";
-import ReviewCard from "@/components/ui/Review/ReviewCard";
 import { usePostReviewMutation } from "@/redux/api/reviewApi";
 import { useSingleServiceQuery } from "@/redux/api/serviceApi";
 import { getUserInfo } from "@/services/auth.service";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 
@@ -17,6 +17,8 @@ const ServiceDetailsPage = ({ params }: { params: any }) => {
   const [rating, setRating] = useState<number | null>(null);
   const { data, isLoading } = useSingleServiceQuery(id as string);
   const [postReview] = usePostReviewMutation();
+  const router = useRouter();
+
   if (isLoading) return <LoadingPage />;
   const { userId } = getUserInfo() as any;
 
@@ -73,7 +75,12 @@ const ServiceDetailsPage = ({ params }: { params: any }) => {
               ))}
           </div>
           <div className="flex mt-6 lg:mt-8">
-            <PrimaryButton label="Book Now" />
+            <div
+              className="w-fit"
+              onClick={() => router.push(`/book/${data?.id}`)}
+            >
+              <PrimaryButton label="Book Now" />
+            </div>
           </div>
         </div>
       </div>
