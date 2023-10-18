@@ -20,7 +20,8 @@ const LoginPage = () => {
       const result = await signIn({ ...data }).unwrap();
       storeUserInfo({ accessToken: result });
       if (result) {
-        router.push("/");
+        // router.push("/");
+        router.back();
         toast.success("Logged in");
       }
     } catch (error) {
