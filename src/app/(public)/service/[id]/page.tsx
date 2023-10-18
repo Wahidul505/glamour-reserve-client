@@ -1,6 +1,7 @@
 "use client";
 import LoadingPage from "@/app/loading";
 import AdditionalInformation from "@/components/ui/AdditionalInformation/AdditionalInformation";
+import PrimaryButton from "@/components/ui/Button/PrimaryButton";
 import Review from "@/components/ui/Review/Review";
 import ReviewCard from "@/components/ui/Review/ReviewCard";
 import { usePostReviewMutation } from "@/redux/api/reviewApi";
@@ -72,9 +73,7 @@ const ServiceDetailsPage = ({ params }: { params: any }) => {
               ))}
           </div>
           <div className="flex mt-6 lg:mt-8">
-            <button className="border border-[#15191E] bg-white cursor-pointer text-[#15191E] px-4 h-12 hover:bg-[#15191E] hover:text-white text-lg lg:text-xl transition-colors duration-200">
-              Book Now
-            </button>
+            <PrimaryButton label="Book Now" />
           </div>
         </div>
       </div>

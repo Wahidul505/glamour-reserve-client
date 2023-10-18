@@ -81,7 +81,7 @@ const Navbar = ({ sidebar }: IProps) => {
           {currentUser.id && !sidebar && (
             <button
               onClick={() => handleLogout()}
-              className="border border-[#15191E] bg-white cursor-pointer text-[#15191E] h-10 hover:bg-[#15191E] hover:text-white text-lg lg:text-xl transition-colors duration-200 lg:w-32 mt-4  ml-3 hidden lg:block mb-3"
+              className="border border-[#15191E] bg-white cursor-pointer text-[#15191E] h-10 hover:bg-[#15191E] hover:text-white text-lg lg:text-xl transition-colors duration-500 rounded-md lg:w-32 mt-4  ml-3 hidden lg:block mb-3 hover:border-white"
             >
               Logout
             </button>
@@ -198,7 +198,7 @@ const Navbar = ({ sidebar }: IProps) => {
                     {currentUser.id && (
                       <button
                         onClick={() => handleLogout()}
-                        className="border border-[#15191E] bg-white cursor-pointer text-[#15191E] h-10 hover:bg-[#15191E] hover:text-white text-lg lg:text-xl transition-colors duration-200 w-44 mt-4  ml-3"
+                        className="border border-[#15191E]  bg-white cursor-pointer text-[#15191E] h-10 hover:bg-[#15191E] hover:text-white text-lg lg:text-xl transition-colors duration-500 rounded-md w-44 mt-4  ml-3"
                       >
                         Logout
                       </button>

@@ -10,6 +10,7 @@ interface IProps {
   placeholder?: string;
   validation?: object;
   label?: string;
+  size?: string;
 }
 
 const FormTextArea = ({
@@ -20,6 +21,7 @@ const FormTextArea = ({
   placeholder,
   validation,
   label,
+  size = "md",
 }: IProps) => {
   const {
     control,
@@ -39,7 +41,9 @@ const FormTextArea = ({
             placeholder={placeholder}
             {...field}
             value={value ? value : field?.value}
-            className="textarea textarea-bordered w-11/12 rounded-none"
+            className={`textarea textarea-bordered w-11/12 rounded-none ${
+              size === "lg" ? "textarea-lg" : "textarea-md"
+            }`}
           />
         )}
       />

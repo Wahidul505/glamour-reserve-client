@@ -6,7 +6,6 @@ import { useServicesQuery } from "@/redux/api/serviceApi";
 import React, { useState } from "react";
 import { BiSolidUpArrow } from "react-icons/bi";
 import { BiSolidDownArrow } from "react-icons/bi";
-import { BsSearch } from "react-icons/bs";
 
 const ServicePage = () => {
   const query: Record<string, any> = {};

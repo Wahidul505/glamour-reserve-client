@@ -4,6 +4,8 @@ import Form from "../Forms/Form";
 import FormTextArea from "../Forms/FormTextArea";
 import FormRatingInput from "../Forms/FormRatingInput";
 import SubmitButton from "../Forms/SubmitButton";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { reviewSchema } from "@/schema/review";
 
 const Review = ({
   reviewAndRatings,
@@ -28,7 +30,10 @@ const Review = ({
         {userId && (
           <>
             <h3 className="mb-3 mt-12">Add a Review</h3>
-            <Form submitHandler={submitHandler}>
+            <Form
+              submitHandler={submitHandler}
+              resolver={yupResolver(reviewSchema)}
+            >
               <div className="rating mb-3">
                 {ratingsArray?.map((el) => (
                   <input
