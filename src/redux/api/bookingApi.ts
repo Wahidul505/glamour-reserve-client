@@ -35,6 +35,15 @@ export const bookingApi = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.booking],
     }),
+
+    bookService: build.mutation({
+      query: (data) => ({
+        url: `${BOOKING_API}`,
+        method: "POST",
+        data: data,
+      }),
+      invalidatesTags: [tagTypes.booking],
+    }),
   }),
 });
 
@@ -43,4 +52,5 @@ export const {
   useMyBookingsQuery,
   useCancelMyBookingMutation,
   useBookingsByDateQuery,
+  useBookServiceMutation,
 } = bookingApi;

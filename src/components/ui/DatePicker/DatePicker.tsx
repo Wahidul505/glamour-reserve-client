@@ -1,26 +1,32 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { DayPicker } from "react-day-picker";
-import { format } from "date-fns";
 import "react-day-picker/dist/style.css";
 
 interface IProps {
-  name?: string;
   label?: string;
-  setDate?: any;
+  selectedDate: Date;
+  setSelectedDate: any;
 }
 
-const DatePickerComponent = ({ name, label, setDate }: IProps) => {
-  const [selected, setSelected] = useState<Date>();
-  useEffect(() => {
-    console.log(selected && format(selected as Date, "yyyy-MM-dd"));
-  }, [selected]);
+const DatePickerComponent = ({
+  label,
+  selectedDate,
+  setSelectedDate,
+}: IProps) => {
+  // useEffect(() => {
+  //   selected && setDate(format(selected as Date, "yyyy-MM-dd"));
+  // }, [selected, setDate]);
 
   return (
-    <>
-      {label ? label : ""}
-      <DayPicker mode="single" selected={selected} onSelect={setSelected} />
-    </>
+    <div>
+      <div className="mb-2 text-lg">{label ? label : ""}</div>
+      <DayPicker
+        mode="single"
+        selected={selectedDate}
+        onSelect={setSelectedDate}
+      />
+    </div>
   );
 };
 

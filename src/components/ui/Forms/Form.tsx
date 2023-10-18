@@ -5,6 +5,7 @@ import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 type IFormConfig = {
   defaultValues?: Record<string, any>;
   resolver?: any;
+  doReset?: boolean;
 };
 
 type IFormProps = {
@@ -17,6 +18,7 @@ const Form = ({
   submitHandler,
   defaultValues,
   resolver,
+  doReset = true,
 }: IFormProps) => {
   const formConfig: IFormConfig = {};
   if (!!defaultValues) formConfig["defaultValues"] = defaultValues;
@@ -27,7 +29,7 @@ const Form = ({
 
   const onSubmit = (data: any) => {
     submitHandler(data);
-    reset();
+    doReset && reset();
   };
 
   useEffect(() => {
