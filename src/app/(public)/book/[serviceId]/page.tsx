@@ -1,28 +1,38 @@
 "use client";
 import LoadingPage from "@/app/loading";
+import DatePickerComponent from "@/components/ui/DatePicker/DatePicker";
 import Form from "@/components/ui/Forms/Form";
 import FormInput from "@/components/ui/Forms/FormInput";
+import SubmitButton from "@/components/ui/Forms/SubmitButton";
 import Redirect from "@/components/ui/Redirect/Redirect";
+import { useBookingsByDateQuery } from "@/redux/api/bookingApi";
 import { useProfileQuery } from "@/redux/api/profileApi";
 import { useSingleServiceQuery } from "@/redux/api/serviceApi";
 import { getUserInfo } from "@/services/auth.service";
 import Image from "next/image";
-import React from "react";
+import React, { useCallback, useState } from "react";
 
 const BookServicePage = ({ params }: { params: any }) => {
   const { serviceId } = params;
   const { data, isLoading } = useSingleServiceQuery(serviceId);
   const { userId } = getUserInfo() as any;
   const { data: userData, isLoading: isUserLoading } = useProfileQuery(userId);
+  const [selectedDate, setSelectedDate] = useState("");
+  const { data: slotData, isLoading: slotIsLoading } =
+    useBookingsByDateQuery(selectedDate);
+
   if (isLoading || isUserLoading) return <LoadingPage />;
 
   const handleSubmit = (data: any) => {
     console.log(data);
   };
 
+  //   console.log(slotData);
+  console.log(selectedDate);
   return (
     <Redirect>
       <div className="lg:px-16 px-4">
+        <h1 className="mb-12">Book Your Service</h1>
         <div className="grid grid-cols-2 lg:grid-cols-3 lg:text-base font-semibold uppercase">
           <div className="text-center">Service</div>
           <div className="text-center">Price</div>
@@ -79,13 +89,20 @@ const BookServicePage = ({ params }: { params: any }) => {
         </div>
 
         {/* form  */}
-        <div>
+        <div className="mt-10">
+          <h1 className="mb-10">Booking Information</h1>
           <Form submitHandler={handleSubmit}>
-            <FormInput name="contactNo" label="Contact Number" />
-            <FormInput
-              name="alternativeContactNo"
-              label="Alternative Contact Number"
-            />
+            <div className="grid grid-cols-1 md:grid-cols-2 space-x-6">
+              <DatePickerComponent />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 space-x-6">
+              <FormInput name="contactNo" label="Contact Number" />
+              <FormInput
+                name="alternativeContactNo"
+                label="Alternative Contact Number"
+              />
+            </div>
+            <SubmitButton label="Book" />
           </Form>
         </div>
       </div>
