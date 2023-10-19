@@ -32,8 +32,6 @@ const ManageBookingPage = () => {
 
   const { data, isLoading } = useAllBookingsQuery({ ...query });
 
-  console.log(data);
-
   if (isLoading) return <LoadingPage />;
 
   if (data.length < 1) return <h2 className="text-center">No Bookings</h2>;

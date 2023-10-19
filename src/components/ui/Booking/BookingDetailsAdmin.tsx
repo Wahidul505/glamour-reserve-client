@@ -3,15 +3,28 @@ import React, { useState } from "react";
 import BookingInfoCard from "./BookingInfoCard";
 import Modal from "../Modal/Modal";
 import {
+  useBookingsByDateQuery,
   useDeleteBookingMutation,
+  useUpdateBookingMutation,
   useUpdateBookingStatusMutation,
 } from "@/redux/api/bookingApi";
 import { toast } from "react-hot-toast";
+import DatePickerComponent from "../DatePicker/DatePicker";
+import { format } from "date-fns";
+import LoadingPage from "@/app/loading";
+import { checkAvailableSlots } from "@/utils/chechAvailableSlots";
+import { slotOptions } from "@/constants/slotOptions";
 
 const BookingDetailsAdmin = ({ booking }: { booking: any }) => {
   const [modalOpen, setModalOpen] = useState(true);
+  const [selectedDate, setSelectedDate] = useState<Date>();
+  const [slot, setSlot] = useState("");
   const [updateBookingStatus] = useUpdateBookingStatusMutation();
+  const [updateBooking] = useUpdateBookingMutation();
   const [deleteBooking] = useDeleteBookingMutation();
+  const { data: slotData, isLoading: isSlotLoading } = useBookingsByDateQuery(
+    selectedDate && format(selectedDate, "yyyy-MM-dd")
+  );
 
   const handleUpdateStatus = async (id: string, status: string) => {
     const res = await updateBookingStatus({
@@ -27,14 +40,36 @@ const BookingDetailsAdmin = ({ booking }: { booking: any }) => {
     setModalOpen(false);
   };
 
+  const handleAdjustSchedule = async (id: string) => {
+    if (!slot) {
+      toast.error("Please select a Slot for booking");
+      return;
+    } else if (!selectedDate) {
+      toast.error("Please select a Date for booking");
+      return;
+    }
+    const selectedSlot = JSON.parse(slot);
+    const payload = {
+      date: format(selectedDate, "yyyy-MM-dd"),
+      startTime: selectedSlot?.startTime,
+      endTime: selectedSlot?.endTime,
+      status: "confirmed",
+    };
+    const res = await updateBooking({ id: id, payload: payload }).unwrap();
+    if (res?.id) toast.success("Rescheduled");
+    else toast.error("Something went wrong");
+    setModalOpen(false);
+  };
+
+  if (isSlotLoading) return <LoadingPage />;
+
+  const availableSlots = checkAvailableSlots(slotOptions, slotData);
+
   return (
     <div
       style={{ border: "1px solid black" }}
-      className="card card-side bg-base-100 z-0 mb-6"
+      className="card-side bg-base-100 z-0 mb-6"
     >
-      <figure>
-        <div className="bg-gray-400 h-full w-full"></div>
-      </figure>
       <div className="card-body ">
         <div className="grid grid-cols-1 md:grid-cols-2">
           <div>
@@ -74,6 +109,7 @@ const BookingDetailsAdmin = ({ booking }: { booking: any }) => {
           </div>
         </div>
         <div className="card-actions justify-end">
+          {/* booking status update  */}
           {booking?.status === "pending" && (
             <Modal
               htmlFor={`admin/booking/update/${booking?.id}`}
@@ -102,6 +138,67 @@ const BookingDetailsAdmin = ({ booking }: { booking: any }) => {
               </div>
             </Modal>
           )}
+
+          {/* booking schedule adjust  */}
+          {booking?.status === "pending" && (
+            <Modal
+              htmlFor={`admin/booking/schedule/${booking?.id}`}
+              label="Adjust Schedule"
+              btnSize="btn-sm"
+              btnTheme="btn-info"
+              modalOpen={modalOpen}
+              setModalOpen={setModalOpen}
+            >
+              <div>
+                <h3 className="mb-4">Current Schedule</h3>
+                <div className="grid grid-cols-2">
+                  <BookingInfoCard label="Date" data={booking?.date} />
+                  <BookingInfoCard
+                    label="Slot"
+                    data={`${booking?.startTime} - ${booking?.endTime}`}
+                  />
+                </div>
+                <h3 className="my-4">Adjust Schedule</h3>
+                <div className="flex flex-col items-center">
+                  <DatePickerComponent
+                    label="Pick a Date for booking"
+                    selectedDate={selectedDate as Date}
+                    setSelectedDate={setSelectedDate}
+                  />
+                  <div className="flex items-center my-4 lg:my-0">
+                    <select
+                      className="select select-bordered w-full max-w-xs"
+                      onChange={(e) => setSlot(e?.target?.value)}
+                      disabled={!selectedDate}
+                    >
+                      <option disabled selected>
+                        Pick a time slot
+                      </option>
+                      {availableSlots.map((option: any, index: number) => (
+                        <option
+                          key={index}
+                          value={JSON.stringify({
+                            startTime: option?.startTime,
+                            endTime: option?.endTime,
+                          })}
+                        >
+                          {option.startTime} - {option.endTime}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <button
+                    className="mt-4 btn"
+                    onClick={() => handleAdjustSchedule(booking?.id)}
+                  >
+                    Reschedule and Confirm
+                  </button>
+                </div>
+              </div>
+            </Modal>
+          )}
+
+          {/* booking deletion  */}
           {booking?.status !== "confirmed" && (
             <Modal
               htmlFor={`admin/booking/delete/${booking?.id}`}
