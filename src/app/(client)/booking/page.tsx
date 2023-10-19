@@ -19,6 +19,7 @@ const BookingsPage = () => {
   const handleDeleteBooking = async (id: string) => {
     const res = await cancelMyBooking(id);
     toast.success("Your Booking has been canceled");
+    setModalOpen(false);
   };
 
   if (data.length < 1)

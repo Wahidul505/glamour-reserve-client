@@ -14,10 +14,11 @@ const Redirect = ({ children, role }: IProps) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!role) {
-      !user?.userId && router.push("/login");
-    } else if (role) {
-      user?.role !== role && !user?.userId && router.push("/login");
+    if (role) {
+      user?.role !== role && router.push("/");
+      !user?.userId && router.push("/");
+    } else {
+      !user?.userId && router.push("/");
     }
     setIsLoading(false);
   }, [router, user?.userId, user?.role, role]);

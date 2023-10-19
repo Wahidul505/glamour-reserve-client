@@ -9,16 +9,16 @@ export const commonCenterItems = [
 ];
 
 export const adminItems = [
-  { key: "1", label: "Dashboard", href: "/admin/profile" },
-  { key: "2", label: "Bookings", href: "/admin/booking" },
+  { key: "1", label: "Profile", href: "/admin/profile" },
+  { key: "2", label: "Manage Bookings", href: "/admin/manage-booking" },
   { key: "3", label: "Manage Categories", href: "/admin/manage-category" },
   { key: "4", label: "Manage Services", href: "/admin/manage-service" },
   { key: "5", label: "Manage Users", href: "/admin/manage-user" },
 ];
 
 export const superAdminItems = [
-  { key: "1", label: "Dashboard", href: "/admin/profile" },
-  { key: "2", label: "Bookings", href: "/admin/booking" },
+  { key: "1", label: "Profile", href: "/admin/profile" },
+  { key: "2", label: "Manage Bookings", href: "/admin/manage-booking" },
   { key: "3", label: "Manage Categories", href: "/admin/manage-category" },
   { key: "4", label: "Manage Services", href: "/admin/manage-service" },
   { key: "5", label: "Manage Users", href: "/admin/manage-user" },

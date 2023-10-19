@@ -44,6 +44,49 @@ export const bookingApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.booking],
     }),
+
+    allBookings: build.query({
+      query: (query: Record<string, any>) => ({
+        url: `${BOOKING_API}`,
+        method: "GET",
+        params: query,
+      }),
+      providesTags: [tagTypes.booking],
+    }),
+
+    singleBooking: build.query({
+      query: (id: string) => ({
+        url: `${BOOKING_API}/${id}`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.booking],
+    }),
+
+    updateBooking: build.mutation({
+      query: ({ id, payload }: { id: string; payload: any }) => ({
+        url: `${BOOKING_API}/${id}`,
+        method: "PATCH",
+        data: payload,
+      }),
+      invalidatesTags: [tagTypes.booking],
+    }),
+
+    updateBookingStatus: build.mutation({
+      query: ({ id, payload }: { id: string; payload: any }) => ({
+        url: `${BOOKING_API}/${id}/update-status`,
+        method: "PATCH",
+        data: payload,
+      }),
+      invalidatesTags: [tagTypes.booking],
+    }),
+
+    deleteBooking: build.mutation({
+      query: (id: string) => ({
+        url: `${BOOKING_API}/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: [tagTypes.booking],
+    }),
   }),
 });
 
@@ -53,4 +96,9 @@ export const {
   useCancelMyBookingMutation,
   useBookingsByDateQuery,
   useBookServiceMutation,
+  useAllBookingsQuery,
+  useSingleBookingQuery,
+  useUpdateBookingMutation,
+  useUpdateBookingStatusMutation,
+  useDeleteBookingMutation,
 } = bookingApi;
