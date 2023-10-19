@@ -18,7 +18,11 @@ const ServiceCard = ({ service, theme, categoryTitle = false }: IProps) => {
     >
       <div className="relative overflow-hidden">
         <Image
-          src="https://i.ibb.co/Kx0MBjW/161458103-804714766803585-5018531988672904671-n.jpg"
+          src={
+            service?.image
+              ? service?.image
+              : "https://i.ibb.co/Kx0MBjW/161458103-804714766803585-5018531988672904671-n.jpg"
+          }
           alt=""
           width={300}
           height={300}

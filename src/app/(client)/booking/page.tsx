@@ -22,7 +22,7 @@ const BookingsPage = () => {
     setModalOpen(false);
   };
 
-  if (data.length < 1)
+  if (!data || data?.length < 1)
     return <h2 className="text-center">You do not have any Bookings</h2>;
 
   return (

@@ -10,6 +10,7 @@ import { storeUserInfo } from "@/services/auth.service";
 import { toast } from "react-hot-toast";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "@/schema/auth";
+import Link from "next/link";
 
 const LoginPage = () => {
   const [signIn] = useSignInMutation();
@@ -46,8 +47,11 @@ const LoginPage = () => {
             placeholder="Password"
             label="Password"
           />
+          <Link href={"/signUp"} className="text-gray-700">
+            New to Out Website?
+          </Link>
         </div>
-        <div className="flex justify-center">
+        <div className="flex justify-center mt-3">
           <SubmitButton label="Login" />
         </div>
       </Form>

@@ -5,6 +5,7 @@ import AdditionalInformation from "@/components/ui/AdditionalInformation/Additio
 import InfoComponent from "@/components/ui/Info/Info";
 import Modal from "@/components/ui/Modal/Modal";
 import CustomTable from "@/components/ui/Table/CustomTable";
+import { useDebounce } from "@/hooks/useDebounce";
 import {
   useDeleteServiceMutation,
   useServicesQuery,
@@ -16,7 +17,15 @@ import { toast } from "react-hot-toast";
 
 const ManageServicePage = () => {
   const [modalOpen, setModalOpen] = useState(true);
-  const { data, isLoading } = useServicesQuery({ limit: 1000 });
+  const query: Record<string, any> = {};
+  const [sortBy, setSortBy] = useState<string>("");
+  const [sortOrder, setSortOrder] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  query["search"] = searchTerm;
+  const debounce = useDebounce(searchTerm, 600);
+  if (!!debounce) query["search"] = searchTerm;
+
+  const { data, isLoading } = useServicesQuery({ ...query });
   const [deleteService] = useDeleteServiceMutation();
   const router = useRouter();
   const columns = [
@@ -116,7 +125,11 @@ const ManageServicePage = () => {
 
   return (
     <div>
-      <ActionHeader label="Categories" href="/admin/manage-service/create" />
+      <ActionHeader
+        label="Services"
+        href="/admin/manage-service/create"
+        setSearchTerm={setSearchTerm}
+      />
 
       <div>
         <CustomTable columns={columns} data={serviceData} />

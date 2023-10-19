@@ -53,7 +53,7 @@ const ProfilePage = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-1 lg:grid-cols-2">
+      <div className="flex">
         {/* profile image  */}
         <div className="">
           <Image
@@ -70,7 +70,7 @@ const ProfilePage = () => {
         </div>
 
         {/* profile information  */}
-        <div className="lg:ml-10">
+        <div className="lg:ml-10 ">
           <h1 className="font-normal">{data?.name}</h1>
           <div className="bg-black bg-opacity-90 px-2 py-1 w-fit text-gray-200 my-1 uppercase">
             {data?.role}

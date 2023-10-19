@@ -19,7 +19,7 @@ const ServicePage = () => {
 
   const debounce = useDebounce(searchTerm, 600);
 
-  if (!!debounce) query["searchTerm"] = searchTerm;
+  if (!!debounce) query["search"] = searchTerm;
 
   const { data, isLoading } = useServicesQuery({ ...query });
   if (isLoading) return <LoadingPage />;

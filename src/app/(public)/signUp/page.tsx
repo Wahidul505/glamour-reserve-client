@@ -10,6 +10,7 @@ import { storeUserInfo } from "@/services/auth.service";
 import { useRouter } from "next/navigation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signUpSchema } from "@/schema/auth";
+import Link from "next/link";
 
 const SignUpPage = () => {
   const [signUp] = useSignUpMutation();
@@ -61,8 +62,11 @@ const SignUpPage = () => {
             placeholder="Your Address"
             label="Address"
           />
+          <Link href={"/login"} className="text-gray-700">
+            Already have an Account?
+          </Link>
         </div>
-        <div className="flex justify-center">
+        <div className="flex justify-center mt-3">
           <SubmitButton label="Create Account" />
         </div>
       </Form>

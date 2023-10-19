@@ -22,7 +22,7 @@ const CustomTable = ({ columns, data }: IProps) => {
           </tr>
         </thead>
         <tbody>
-          {data.map((item: any, index: number) => {
+          {data?.map((item: any, index: number) => {
             return (
               <tr key={index}>
                 {columns.map((column: IColumn, columnIndex: number) => {
