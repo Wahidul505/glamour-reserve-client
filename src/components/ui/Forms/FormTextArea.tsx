@@ -31,7 +31,7 @@ const FormTextArea = ({
   const errorMessage = getErrorMessageByPropertyName(name, errors);
 
   return (
-    <div className="mb-3">
+    <div className="mb-5">
       {label && <div className="mb-1"> {label ? label : ""}</div>}
       <Controller
         control={control}
@@ -48,7 +48,7 @@ const FormTextArea = ({
         )}
       />
       {errorMessage && (
-        <small className="text-red-500 mt-1">{errorMessage}</small>
+        <div className="text-red-500 mt-1 text-sm">{errorMessage}</div>
       )}
     </div>
   );

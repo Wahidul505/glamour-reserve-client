@@ -1,3 +1,4 @@
+import { getErrorMessageByPropertyName } from "@/utils/schemaValidator";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
@@ -25,10 +26,14 @@ const FormSelectInput = ({
   label,
   placeholder,
 }: ISelectProps) => {
-  const { control } = useFormContext();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
+  const errorMessage = getErrorMessageByPropertyName(name, errors);
   return (
-    <>
-      {label ? label : ""}
+    <div className="mb-5">
+      {label && <div className="mb-1"> {label ? label : ""}</div>}
       <Controller
         control={control}
         name={name}
@@ -47,17 +52,12 @@ const FormSelectInput = ({
                 </option>
               ))}
           </select>
-          //   <Select
-          //     onChange={onChange}
-          //     options={options}
-          //     value={value}
-          //     defaultValue={defaultValue?.value}
-          //     style={{ width: "100%" }}
-          //     placeholder={placeholder}
-          //   />
         )}
       />
-    </>
+      {errorMessage && (
+        <div className="text-red-500 mt-1 text-sm">{errorMessage}</div>
+      )}
+    </div>
   );
 };
 

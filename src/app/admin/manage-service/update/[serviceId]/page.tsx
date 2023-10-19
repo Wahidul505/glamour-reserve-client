@@ -6,38 +6,30 @@ import FormSelectInput from "@/components/ui/Forms/FormSelectInput";
 import FormTextArea from "@/components/ui/Forms/FormTextArea";
 import SubmitButton from "@/components/ui/Forms/SubmitButton";
 import { useCategoriesQuery } from "@/redux/api/categoryApi";
-import { useCreateServiceMutation } from "@/redux/api/serviceApi";
-import { serviceSchema } from "@/schema/service";
-import { yupResolver } from "@hookform/resolvers/yup";
+import {
+  useSingleServiceQuery,
+  useUpdateServiceMutation,
+} from "@/redux/api/serviceApi";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
-const CreateServicePage = () => {
-  const [contentInputs, setContentInputs] = useState([0]);
-  const [createService] = useCreateServiceMutation();
+const UpdateServicePage = ({ params }: { params: any }) => {
+  const { serviceId } = params;
+  const { data: serviceData, isLoading } = useSingleServiceQuery(serviceId);
   const { data: categoryData, isLoading: isCategoryLoading } =
     useCategoriesQuery({ limit: 100 });
+  const [updateService] = useUpdateServiceMutation() as any;
+  const [contentInputs, setContentInputs] = useState([0]);
   const router = useRouter();
 
-  const handleSubmit = async (data: any) => {
-    data.information = data.information?.filter((info: any) => !!info);
-    if (data.information.length < 1) {
-      toast.error("Add Information");
-      return;
-    }
-    data.price = Number(data.price);
-    data.availability === "true"
-      ? (data.availability = true)
-      : (data.availability = false);
-    const res = await createService(data).unwrap();
-    if (res.id) {
-      toast.success("Service Created");
-      router.push("/admin/manage-service");
-    } else toast.error("Something went wrong");
-  };
+  useEffect(() => {
+    setContentInputs(
+      serviceData?.information?.map((info: string, index: number) => index)
+    );
+  }, [serviceData?.information]);
 
-  if (isCategoryLoading) return <LoadingPage />;
+  if (isLoading || isCategoryLoading) return <LoadingPage />;
 
   const categoryOptions = categoryData.map((category: any) => ({
     label: category?.title,
@@ -49,26 +41,50 @@ const CreateServicePage = () => {
     { label: "Not available", value: "false" },
   ];
 
+  const defaultValues = {
+    title: serviceData?.title,
+    price: serviceData?.price,
+    information: serviceData?.information,
+  };
+
+  const handleSubmit = async (data: any) => {
+    data.information = data.information?.filter((info: any) => !!info);
+    if (data.information.length < 1) {
+      toast.error("Add Information");
+      return;
+    }
+    if (data?.price) data.price = Number(data.price);
+    if (data?.availability) {
+      data.availability === "true"
+        ? (data.availability = true)
+        : (data.availability = false);
+    }
+
+    const res = await updateService({
+      id: serviceData?.id,
+      payload: data,
+    }).unwrap();
+    if (res.id) {
+      toast.success("Service Created");
+      router.push("/admin/manage-service");
+    } else toast.error("Something went wrong");
+  };
+
   return (
     <div>
-      <h2 className="mb-4">Create Service</h2>
+      <h2 className="mb-4">Update Service</h2>
       <div className="lg:w-2/3">
         <Form
           submitHandler={handleSubmit}
           doReset={false}
-          resolver={yupResolver(serviceSchema)}
+          defaultValues={defaultValues}
         >
           <FormInput name="title" label="Title" placeholder="Service Title" />
-          <FormInput
-            name="price"
-            label="Price"
-            type="number"
-            placeholder="Service Price"
-          />
+          <FormInput name="price" label="Price" placeholder="Service Price" />
           <FormSelectInput
             name="categoryId"
             options={categoryOptions}
-            label="Select Package Category"
+            label="Select Category"
           />
           <FormSelectInput
             name="availability"
@@ -76,7 +92,7 @@ const CreateServicePage = () => {
             label="Select Availability"
           />
           <div className="mb-1">Information</div>
-          {contentInputs.map((order) => (
+          {contentInputs?.map((order) => (
             <div key={order}>
               <FormTextArea
                 name={`information[${order}]`}
@@ -100,11 +116,11 @@ const CreateServicePage = () => {
           </button>
 
           {/* ends here  */}
-          <SubmitButton label="Create" />
+          <SubmitButton label="Update" />
         </Form>
       </div>
     </div>
   );
 };
 
-export default CreateServicePage;
+export default UpdateServicePage;

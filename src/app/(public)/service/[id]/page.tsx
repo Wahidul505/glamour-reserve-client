@@ -105,7 +105,12 @@ const ServiceDetailsPage = ({ params }: { params: any }) => {
       </div>
 
       {layout === "additional-info" && data?.category?.information && (
-        <AdditionalInformation information={data?.category?.information} />
+        <div className="mt-3 lg:px-24 px-4">
+          <AdditionalInformation
+            information={data?.category?.information}
+            textSize="lg:text-lg text-base"
+          />
+        </div>
       )}
 
       {layout === "review" && (

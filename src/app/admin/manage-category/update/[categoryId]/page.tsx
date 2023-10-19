@@ -1,19 +1,38 @@
 "use client";
+import LoadingPage from "@/app/loading";
 import Form from "@/components/ui/Forms/Form";
 import FormInput from "@/components/ui/Forms/FormInput";
 import FormTextArea from "@/components/ui/Forms/FormTextArea";
 import SubmitButton from "@/components/ui/Forms/SubmitButton";
-import { useCreateCategoryMutation } from "@/redux/api/categoryApi";
+import {
+  useSingleCategoryQuery,
+  useUpdateCategoryMutation,
+} from "@/redux/api/categoryApi";
 import { categorySchema } from "@/schema/category";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
-const CreateCategoryPage = () => {
+const UpdateCategoryPage = ({ params }: { params: any }) => {
+  const { categoryId } = params;
+  const { data: categoryData, isLoading } = useSingleCategoryQuery(categoryId);
+  const [updateCategory] = useUpdateCategoryMutation();
   const [contentInputs, setContentInputs] = useState([0]);
-  const [createCategory] = useCreateCategoryMutation();
   const router = useRouter();
+
+  useEffect(() => {
+    setContentInputs(
+      categoryData?.information?.map((info: string, index: number) => index)
+    );
+  }, [categoryData?.information]);
+
+  if (isLoading) return <LoadingPage />;
+
+  const defaultValues = {
+    title: categoryData?.title,
+    information: categoryData?.information,
+  };
 
   const handleSubmit = async (data: any) => {
     data.information = data.information?.filter((info: any) => !!info);
@@ -21,25 +40,29 @@ const CreateCategoryPage = () => {
       toast.error("Add Information");
       return;
     }
-    const res = await createCategory(data).unwrap();
+    const res = await updateCategory({
+      id: categoryData?.id,
+      payload: data,
+    }).unwrap();
     if (res.id) {
-      toast.success("Category Created");
+      toast.success("Category Updated");
       router.push("/admin/manage-category");
     } else toast.error("Something went wrong");
   };
 
   return (
     <div>
-      <h2 className="mb-4">Create Category</h2>
+      <h2 className="mb-4">Update Category</h2>
       <div className="lg:w-2/3">
         <Form
           submitHandler={handleSubmit}
           doReset={false}
           resolver={yupResolver(categorySchema)}
+          defaultValues={defaultValues}
         >
           <FormInput name="title" label="Title" placeholder="Category Title" />
           <div className="mb-1">Information</div>
-          {contentInputs.map((order) => (
+          {contentInputs?.map((order) => (
             <div key={order}>
               <FormTextArea
                 name={`information[${order}]`}
@@ -63,11 +86,11 @@ const CreateCategoryPage = () => {
           </button>
 
           {/* ends here  */}
-          <SubmitButton label="Create" />
+          <SubmitButton label="Update" />
         </Form>
       </div>
     </div>
   );
 };
 
-export default CreateCategoryPage;
+export default UpdateCategoryPage;

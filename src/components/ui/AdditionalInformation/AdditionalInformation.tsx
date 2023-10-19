@@ -2,14 +2,15 @@ import React from "react";
 
 interface IProps {
   information: string[];
+  textSize: string;
 }
 
-const AdditionalInformation = ({ information }: IProps) => {
+const AdditionalInformation = ({ information, textSize }: IProps) => {
   return (
-    <div className="mt-3 lg:px-24 px-4">
+    <div>
       {information &&
         information?.map((info: string, index: number) => (
-          <p key={index} className="lg:text-lg">
+          <p key={index} className={textSize}>
             • {info}
           </p>
         ))}
