@@ -16,7 +16,7 @@ const BlogCard = ({ blog, theme }: IProps) => {
     >
       <div className="relative overflow-hidden">
         <Image
-          src="https://i.ibb.co/Kx0MBjW/161458103-804714766803585-5018531988672904671-n.jpg"
+          src="https://i.ibb.co/9WLqXvH/162044866-494105921752427-2053151397308435679-n.jpg"
           alt=""
           width={300}
           height={300}
