@@ -14,6 +14,8 @@ export const adminItems = [
   { key: "3", label: "Manage Categories", href: "/admin/manage-category" },
   { key: "4", label: "Manage Services", href: "/admin/manage-service" },
   { key: "5", label: "Manage Users", href: "/admin/manage-user" },
+  { key: "6", label: "Manage Blogs", href: "/admin/manage-blog" },
+  { key: "7", label: "Manage FAQs", href: "/admin/manage-faq" },
 ];
 
 export const superAdminItems = [
@@ -22,7 +24,8 @@ export const superAdminItems = [
   { key: "3", label: "Manage Categories", href: "/admin/manage-category" },
   { key: "4", label: "Manage Services", href: "/admin/manage-service" },
   { key: "5", label: "Manage Users", href: "/admin/manage-user" },
-  { key: "6", label: "Manage Admins", href: "/admin/manage-admin" },
+  { key: "6", label: "Manage Blogs", href: "/admin/manage-blog" },
+  { key: "7", label: "Manage FAQs", href: "/admin/manage-faq" },
 ];
 
 export const clientItems = [

@@ -5,7 +5,7 @@ import React from "react";
 
 interface IProps {
   service: any;
-  theme: string;
+  theme: "dark" | "light";
   categoryTitle?: boolean;
 }
 

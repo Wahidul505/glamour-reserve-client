@@ -12,7 +12,6 @@ import {
   adminItems,
   clientItems,
   commonCenterItems,
-  superAdminItems,
 } from "@/constants/linkItems";
 
 interface IProps {
@@ -149,7 +148,7 @@ const Navbar = ({ sidebar }: IProps) => {
                     ))}
                   {currentUser.role &&
                     currentUser.role === "super_admin" &&
-                    superAdminItems?.map((item) => (
+                    adminItems?.map((item) => (
                       <li
                         className={path == item?.href ? "active" : ""}
                         key={item?.href}
