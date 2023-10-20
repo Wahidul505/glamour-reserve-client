@@ -11,7 +11,7 @@ const FeaturedSection = () => {
   const serviceData = data?.slice(0, 3);
 
   return (
-    <div className="lg:my-24 my-12">
+    <div>
       <HomePageHeading label="Featured" subLabel="Newly" />
       <div className="bg-white mb-8 lg:mb-12 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
         {serviceData &&

@@ -10,7 +10,7 @@ const ReviewCard = ({ review }: { review: any }) => {
           src={
             review?.user?.profileImg
               ? review?.user?.profileImg
-              : "https://i.ibb.co/277qX6m/161007137-818106462117352-2772674974349771071-n.jpg"
+              : "https://i.ibb.co/6NdLWh8/5856.jpg"
           }
           alt=""
           width={300}

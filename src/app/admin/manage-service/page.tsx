@@ -18,8 +18,6 @@ import { toast } from "react-hot-toast";
 const ManageServicePage = () => {
   const [modalOpen, setModalOpen] = useState(true);
   const query: Record<string, any> = {};
-  const [sortBy, setSortBy] = useState<string>("");
-  const [sortOrder, setSortOrder] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
   query["search"] = searchTerm;
   const debounce = useDebounce(searchTerm, 600);

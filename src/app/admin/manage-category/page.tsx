@@ -25,6 +25,7 @@ const ManageCategoryPage = () => {
   ];
 
   if (isLoading) return <LoadingPage />;
+  console.log(data);
 
   const handleDeleteCategory = async (id: string) => {
     const res = await deleteCategory(id).unwrap();

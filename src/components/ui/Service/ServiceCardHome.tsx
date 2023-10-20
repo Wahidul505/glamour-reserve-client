@@ -11,7 +11,7 @@ interface IProps {
 const ServiceCardHome = ({ service }: IProps) => {
   const router = useRouter();
   return (
-    <div className="card w-96 bg-base-100 shadow-xl image-full">
+    <div className="card w-96 bg-base-100 shadow-xl image-full my-6 lg:my-0">
       <figure>
         <Image
           src={
@@ -22,7 +22,6 @@ const ServiceCardHome = ({ service }: IProps) => {
           alt=""
           width={300}
           height={300}
-          className="w-full h-full hover:scale-105 transition-transform duration-700 ease-in-out"
         />
       </figure>
       <div className="card-body grid grid-cols-1 grid-rows-3">

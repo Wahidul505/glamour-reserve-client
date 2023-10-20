@@ -34,7 +34,7 @@ const ManageBookingPage = () => {
 
   if (isLoading) return <LoadingPage />;
 
-  if (data.length < 1) return <h2 className="text-center">No Bookings</h2>;
+  if (data?.length < 1) return <h2 className="text-center">No Bookings</h2>;
 
   return (
     <div>

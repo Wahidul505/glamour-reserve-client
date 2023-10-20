@@ -44,11 +44,15 @@ const ServiceDetailsPage = ({ params }: { params: any }) => {
           <div>
             <div className="overflow-hidden">
               <Image
-                src="https://i.ibb.co/Kx0MBjW/161458103-804714766803585-5018531988672904671-n.jpg"
+                src={
+                  data?.image
+                    ? data?.image
+                    : "https://i.ibb.co/Kx0MBjW/161458103-804714766803585-5018531988672904671-n.jpg"
+                }
                 alt=""
-                width={300}
-                height={300}
-                className="w-full h-full hover:scale-105 transition-transform duration-700 ease-in-out"
+                width={500}
+                height={500}
+                className="hover:scale-105 transition-transform duration-700 ease-in-out"
               />
             </div>
             <h2 className="text-gray-300 mt-4 uppercase">{data?.title}</h2>

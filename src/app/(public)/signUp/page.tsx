@@ -20,6 +20,10 @@ const SignUpPage = () => {
     try {
       const result = await signUp({ ...data }).unwrap();
       storeUserInfo({ accessToken: result });
+      if (!result) {
+        toast.error("User Already exist");
+        return;
+      }
       if (result) {
         router.push("/");
         toast.success("Account Created");

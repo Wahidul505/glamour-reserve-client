@@ -24,7 +24,7 @@ const PackageSlide = () => {
 
   return (
     <div className="lg:block">
-      {categoryData && categoryData.length === 3 ? (
+      {categoryData && categoryData?.length === 3 ? (
         <Carousel>
           {categoryData?.map((category: any) => (
             <div key={category.id}>

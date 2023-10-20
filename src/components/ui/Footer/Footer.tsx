@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import { BsTelephone } from "react-icons/bs";
 
 const Footer = () => {
   return (
@@ -7,24 +8,22 @@ const Footer = () => {
       <footer className="footer p-10 bg-black bg-opacity-90 text-gray-300">
         <nav>
           <header className="footer-title">Contents</header>
-          <Link href={"/package"} className="text-gray-300">
+          <Link href={"/package"} className="text-gray-300 text-base">
             Packages
           </Link>
-          <Link href={"/blog"} className="text-gray-300">
+          <Link href={"/blog"} className="text-gray-300 text-base">
             Blogs
           </Link>
-          <Link href={"/faq"} className="text-gray-300">
+          <Link href={"/faq"} className="text-gray-300 text-base">
             FAQ
           </Link>
         </nav>
         <nav>
-          <header className="footer-title">Company</header>
-          <Link href={"/about"} className="text-gray-300">
-            About us
-          </Link>
-          <Link href={"/contact"} className="text-gray-300">
-            Contact
-          </Link>
+          <header className="footer-title">Contact Us</header>
+          <div className="flex items-center text-xl">
+            <BsTelephone />
+            <div className="ml-2">01818-XXXXXXX</div>
+          </div>
         </nav>
         <nav>
           <header className="footer-title">Social</header>

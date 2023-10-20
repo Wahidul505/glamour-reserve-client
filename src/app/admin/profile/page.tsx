@@ -60,7 +60,7 @@ const ProfilePage = () => {
             src={
               data?.profileImg
                 ? data?.profileImg
-                : "https://i.ibb.co/Kx0MBjW/161458103-804714766803585-5018531988672904671-n.jpg"
+                : "https://i.ibb.co/6NdLWh8/5856.jpg"
             }
             alt=""
             width={300}

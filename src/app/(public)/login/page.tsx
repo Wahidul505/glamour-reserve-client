@@ -20,6 +20,10 @@ const LoginPage = () => {
     try {
       const result = await signIn({ ...data }).unwrap();
       storeUserInfo({ accessToken: result });
+      if (!result) {
+        toast.error("Wrong User Credentials");
+        return;
+      }
       if (result) {
         // router.push("/");
         router.back();

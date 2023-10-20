@@ -24,9 +24,9 @@ const ServiceCard = ({ service, theme, categoryTitle = false }: IProps) => {
               : "https://i.ibb.co/Kx0MBjW/161458103-804714766803585-5018531988672904671-n.jpg"
           }
           alt=""
-          width={300}
-          height={300}
-          className="w-full h-full hover:scale-105 transition-transform duration-700 ease-in-out"
+          width={400}
+          height={400}
+          className="hover:scale-105 transition-transform duration-700 ease-in-out"
         />
         <div
           className={`absolute top-0 left-0 w-20 h-20 flex flex-col items-center justify-center ${

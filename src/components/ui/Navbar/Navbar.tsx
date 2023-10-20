@@ -51,9 +51,12 @@ const Navbar = ({ sidebar }: IProps) => {
       <div className="navbar bg-[#15191E]">
         {/* mobile device  */}
         <div className="navbar-start">
-          <a className="btn btn-ghost normal-case text-xl text-white">
-            daisyUI
-          </a>
+          <Link
+            href={"/"}
+            className="btn btn-ghost normal-case text-xl lg:text-2xl text-white no-underline font-thin"
+          >
+            Glamour Reserve
+          </Link>
         </div>
         {/* center items - desktop  */}
         <div className="navbar-center hidden lg:flex">
