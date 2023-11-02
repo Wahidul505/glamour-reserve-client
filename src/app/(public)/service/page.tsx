@@ -1,5 +1,6 @@
 "use client";
 import LoadingPage from "@/app/loading";
+import Heading from "@/components/ui/Heading/Heading";
 import ServiceCard from "@/components/ui/Service/ServiceCard";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useServicesQuery } from "@/redux/api/serviceApi";
@@ -32,14 +33,14 @@ const ServicePage = () => {
   return (
     <div>
       {/* search bar  */}
-      <div className="lg:px-28 px-4">
-        <h1 className="mb-3">Search your Suits</h1>
-        <div className="flex">
+      <div className="">
+        <Heading label="Makeover Services" subLabel="Our" />
+        <div className="flex justify-center">
           <input
             type="text"
             name="search"
             placeholder="Search"
-            className="border border-gray-700 h-11 focus:border-gray-700 px-2 text-lg"
+            className="border-solid border-2 rounded border-[#ffcf99] bg-transparent h-10 focus:outline-none px-2 text-lg w-52 md:w-96"
             onChange={(e) => setSearchTerm(e.target.value)}
           />
 
@@ -68,7 +69,7 @@ const ServicePage = () => {
         </div>
       </div>
       {/* all services  */}
-      <div className="lg:px-28 px-4 py-20 mb-8 lg:mb-12 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
+      <div className=" pb-20 pt-10 mb-8 lg:mb-12 flex flex-wrap justify-center">
         {data &&
           data?.map((service: any) => (
             <ServiceCard

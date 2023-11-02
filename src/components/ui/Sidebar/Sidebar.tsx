@@ -13,14 +13,14 @@ interface IProps {
 
 const Sidebar = ({ items }: IProps) => {
   return (
-    <ul className="menu p-4 w-72 min-h-screen bg-base-200 text-base-content hidden lg:block">
+    <ul className="menu p-4 w-72 min-h-screen bg-[#1e1e24] text-[#fff8f0] hidden lg:block">
       {/* Sidebar content here */}
       {items &&
         items?.map((item, index) => (
           <li key={index} className="my-2">
             <Link
               href={item.href}
-              className="no-underline text-lg text-gray-700 mx-1"
+              className="no-underline text-lg text-[#fff8f0] mx-1"
             >
               {item.label}
             </Link>

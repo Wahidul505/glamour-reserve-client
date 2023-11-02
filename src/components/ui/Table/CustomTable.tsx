@@ -14,7 +14,7 @@ const CustomTable = ({ columns, data }: IProps) => {
   return (
     <div className="overflow-x-auto">
       <table className="table">
-        <thead>
+        <thead className="text-[#92140c]">
           <tr>
             {columns.map((column: IColumn, index: number) => (
               <th key={index}>{column.label}</th>

@@ -18,6 +18,8 @@ import { slotOptions } from "@/constants/slotOptions";
 import { checkAvailableSlots } from "@/utils/chechAvailableSlots";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import Heading from "@/components/ui/Heading/Heading";
+import PrimaryButton from "@/components/ui/Button/PrimaryButton";
 
 const BookServicePage = ({ params }: { params: any }) => {
   const { serviceId } = params;
@@ -60,77 +62,66 @@ const BookServicePage = ({ params }: { params: any }) => {
 
   return (
     <Redirect>
-      <div className="lg:px-16 px-4">
-        <h1 className="mb-12">Book Your Service</h1>
-        <div className="grid grid-cols-2 lg:grid-cols-3 lg:text-base font-semibold uppercase">
-          <div className="text-center">Service</div>
-          <div className="text-center">Price</div>
-          <div className="text-center hidden lg:block">Category</div>
-        </div>
-        <hr />
-        <div className="grid grid-cols-2 lg:grid-cols-3 mt-5 items-center">
-          <div className="flex lg:items-center justify-center">
-            <Image
-              src={
-                data?.image
-                  ? data?.image
-                  : "https://i.ibb.co/Kx0MBjW/161458103-804714766803585-5018531988672904671-n.jpg"
-              }
-              alt=""
-              width={100}
-              height={100}
-              className="hidden lg:block"
-            />
-            <div className="uppercase font-semibold lg:ml-3">{data?.title}</div>
+      <div>
+        <Heading label="Book your Service" subLabel="Booking" />
+        <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-10 items-center justify-center md:mt-12">
+          {/* image  */}
+          <div>
+            <div className="overflow-hidden">
+              <Image
+                src={
+                  data?.image
+                    ? data?.image
+                    : "https://i.ibb.co/Kx0MBjW/161458103-804714766803585-5018531988672904671-n.jpg"
+                }
+                alt=""
+                height={500}
+                width={500}
+                className="border-2 border-solid border-[#FFCF99] p-5 rounded-full w-56 h-72 lg:w-80  lg:h-96"
+              />
+            </div>
           </div>
-          <div className="text-center">{data?.price} TK</div>
-          <div className="text-center hidden lg:block">
-            {data?.category?.title}
-          </div>
-        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 lg:text-base font-semibold uppercase mt-10">
-          <div className="text-center">Information</div>
-          <div className="text-center hidden lg:block">
-            Additional Information
-          </div>
-        </div>
-        <hr />
-        <div className="grid grid-cols-1 lg:grid-cols-2 mt-5">
-          <div className="">
-            {data?.information &&
-              data?.information?.map((info: string, index: number) => (
-                <p key={index} className="lg:text-lg">
-                  • {info}
-                </p>
-              ))}
-          </div>
-          <div className="hidden lg:block">
-            {data?.category?.information &&
-              data?.category?.information?.map(
-                (info: string, index: number) => (
-                  <p key={index} className="lg:text-lg">
-                    • {info}
+          {/* details  */}
+          <div>
+            <div className="text-lg md:text-2xl text-[#92140C]">Details</div>
+            <div className="mt-1">
+              {data?.information &&
+                data?.information?.map((info: string, index: number) => (
+                  <p key={index} className="text-sm md:text-base">
+                    - {info}
                   </p>
-                )
-              )}
+                ))}
+            </div>
+            <div className="text-lg md:text-2xl text-[#92140C] mt-3 md:mt-4">
+              Category
+            </div>
+            <p className="text-sm md:text-base">
+              {data?.category?.title ? data?.category?.title : ""}
+            </p>
+            <div className="text-lg md:text-2xl text-[#92140C] mt-3 md:mt-4">
+              Price
+            </div>
+            <p className="text-sm md:text-base">{data?.price} TK</p>
           </div>
         </div>
 
         {/* form  */}
-        <div className="mt-10">
-          <h1 className="mb-10">Booking Information</h1>
+        <div className="mt-8 md:mt-14">
+          <Heading label="Provide Information" subLabel="Booking" />
           <Form submitHandler={handleSubmit} doReset={false}>
-            <div className="grid grid-cols-1 md:grid-cols-2 space-x-6">
+            <div className="flex flex-col items-center">
               <DatePickerComponent
                 label="Pick a Date for booking"
                 selectedDate={selectedDate as Date}
                 setSelectedDate={setSelectedDate}
               />
-              {/* <FormSelectInput name="select" options={options} /> */}
-              <div className="flex items-center my-4 lg:my-0">
+              <div>
+                <div className="mb-2 text-xl md:text-2xl text-[#92140C]">
+                  Pick a time for booking
+                </div>
                 <select
-                  className="select select-bordered w-full max-w-xs"
+                  className="select w-56  md:w-72  rounded border border-solid border-[#FFCF99] focus:outline-none"
                   onChange={(e) => setSlot(e?.target?.value)}
                   disabled={!selectedDate}
                 >
@@ -150,15 +141,18 @@ const BookServicePage = ({ params }: { params: any }) => {
                   ))}
                 </select>
               </div>
+              <div className="w-full mt-4 md:mt-10">
+                <div className="mb-2 text-xl md:text-2xl text-[#92140C]">
+                  Give Your Information
+                </div>
+                <FormInput name="contactNo" label="Contact Number" />
+                <FormInput
+                  name="alternativeContactNo"
+                  label="Alternative Contact Number"
+                />
+                <PrimaryButton label="Book" type="submit" />
+              </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 md:space-x-6 mt-6">
-              <FormInput name="contactNo" label="Contact Number" />
-              <FormInput
-                name="alternativeContactNo"
-                label="Alternative Contact Number"
-              />
-            </div>
-            <SubmitButton label="Book" />
           </Form>
         </div>
       </div>

@@ -6,7 +6,9 @@ const PublicPage = ({ children }: IChildrenProps) => {
   return (
     <>
       <Navbar sidebar={true} />
-      <div className="pt-32">{children}</div>
+      <div className="pt-32 md:pt-36 lg:pt-40 max-w-7xl mx-auto px-4 md:px-12 lg:px-24">
+        {children}
+      </div>
     </>
   );
 };

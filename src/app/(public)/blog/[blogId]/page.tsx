@@ -9,9 +9,9 @@ const BlogDetails = ({ params }: { params: any }) => {
   if (isLoading) return <LoadingPage />;
 
   return (
-    <div className="lg:px-28 px-4">
-      <h1>{data?.title}</h1>
-      <div className="lg:mt-10 mt-5 lg:text-lg">
+    <div className="">
+      <h1 className="text-[#92140C] text-xl md:text-2xl">{data?.title}</h1>
+      <div className="lg:mt-6 mt-3 text-base lg:text-xl">
         <p>{data?.content}</p>
       </div>
     </div>

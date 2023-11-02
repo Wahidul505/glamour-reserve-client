@@ -11,7 +11,7 @@ const AdditionalInformation = ({ information, textSize }: IProps) => {
       {information &&
         information?.map((info: string, index: number) => (
           <p key={index} className={textSize}>
-            • {info}
+            - {info}
           </p>
         ))}
     </div>

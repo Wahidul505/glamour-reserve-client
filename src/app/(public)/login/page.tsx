@@ -11,6 +11,8 @@ import { toast } from "react-hot-toast";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "@/schema/auth";
 import Link from "next/link";
+import Heading from "@/components/ui/Heading/Heading";
+import PrimaryButton from "@/components/ui/Button/PrimaryButton";
 
 const LoginPage = () => {
   const [signIn] = useSignInMutation();
@@ -36,9 +38,9 @@ const LoginPage = () => {
 
   return (
     <div>
-      <CommonHeading label="Login to your Account" />
+      <Heading label="Login to your account" subLabel="Login" />
       <Form submitHandler={handleSubmit} resolver={yupResolver(loginSchema)}>
-        <div className="border border-black rounded flex flex-col w-2/3 lg:w-1/3 mx-auto">
+        <div className=" flex flex-col w-2/3 lg:w-1/3 mx-auto">
           <FormInput
             name="email"
             type="email"
@@ -51,12 +53,12 @@ const LoginPage = () => {
             placeholder="Password"
             label="Password"
           />
-          <Link href={"/signUp"} className="text-gray-700">
+          <Link href={"/signUp"} className="text-[#FFCF99] -mt-2">
             New to Out Website?
           </Link>
         </div>
         <div className="flex justify-center mt-3">
-          <SubmitButton label="Login" />
+          <PrimaryButton label="Login" type="submit" />
         </div>
       </Form>
     </div>

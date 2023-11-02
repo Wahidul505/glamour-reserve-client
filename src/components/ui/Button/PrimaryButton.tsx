@@ -1,8 +1,17 @@
 import React from "react";
 
-const PrimaryButton = ({ label }: { label: string }) => {
+const PrimaryButton = ({
+  label,
+  type = "button",
+}: {
+  label: string;
+  type?: "submit" | "button";
+}) => {
   return (
-    <button className="border border-[#15191E] bg-white cursor-pointer text-[#15191E] px-4 h-12 hover:bg-[#15191E] hover:text-white text-lg lg:text-xl transition-colors duration-500 rounded-md">
+    <button
+      type={type}
+      className="border-solid border-[#92140C] bg-[#92140C] cursor-pointer  px-4 h-12 hover:bg-[#FFF8F0] text-[#FFF8F0] hover:text-[#1E1E24] hover:border-[#1E1E24]  text-lg lg:text-xl transition-colors duration-500 rounded"
+    >
       {label}
     </button>
   );

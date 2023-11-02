@@ -16,7 +16,7 @@ const Modal = ({
   label,
   modalOpen,
   setModalOpen,
-  btnSize = "btn-lg",
+  btnSize = "btn-md",
   btnTheme,
 }: IProps) => {
   return (
@@ -24,7 +24,7 @@ const Modal = ({
       <label
         onClick={() => setModalOpen(true)}
         htmlFor={htmlFor}
-        className={`btn lg:mt-0 ${btnSize} ${btnTheme} `}
+        className={`btn rounded lg:mt-0 ${btnSize} ${btnTheme} `}
       >
         {label}
       </label>
@@ -33,7 +33,7 @@ const Modal = ({
         <>
           <input type="checkbox" id={htmlFor} className="modal-toggle" />
           <div className="modal">
-            <div className="modal-box">
+            <div className="modal-box rounded">
               <div className="modal-action">
                 <label
                   htmlFor={htmlFor}

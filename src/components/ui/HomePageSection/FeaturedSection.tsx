@@ -1,22 +1,24 @@
 "use client";
 import LoadingPage from "@/app/loading";
-import { useServicesQuery } from "@/redux/api/serviceApi";
 import React from "react";
-import ServiceCardHome from "../Service/ServiceCardHome";
-import HomePageHeading from "./HomePageHeading";
+import Heading from "../Heading/Heading";
+import { useCategoriesQuery } from "@/redux/api/categoryApi";
+import ServiceCategoryCard from "../Service/ServiceCategoryCard";
+import Image from "next/image";
 
 const FeaturedSection = () => {
-  const { data, isLoading } = useServicesQuery({ limit: 100 });
+  const { data, isLoading } = useCategoriesQuery({ limit: 100 });
   if (isLoading) return <LoadingPage />;
-  const serviceData = data?.slice(0, 3);
 
   return (
     <div>
-      <HomePageHeading label="Featured" subLabel="Newly" />
-      <div className="bg-white mb-8 lg:mb-12 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
-        {serviceData &&
-          serviceData?.map((service: any) => (
-            <ServiceCardHome key={service.id} service={service} />
+      <Heading label="Packages" subLabel="Makeover" />
+      <div className="carousel w-full rounded border-solid border border-[#FFCF99] py-1">
+        {data &&
+          data?.map((category: any) => (
+            <div key={category?.id} className="carousel-item">
+              <ServiceCategoryCard category={category} />
+            </div>
           ))}
       </div>
     </div>

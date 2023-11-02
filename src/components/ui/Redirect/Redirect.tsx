@@ -15,9 +15,9 @@ const Redirect = ({ children, role }: IProps) => {
 
   useEffect(() => {
     if (role && user?.role !== "super_admin") {
-      user?.role !== role && router.push("/");
+      user?.role !== role && router.push("/login");
     } else {
-      !user?.userId && router.push("/");
+      !user?.userId && router.push("/login");
     }
     setIsLoading(false);
   }, [router, user?.userId, user?.role, role]);

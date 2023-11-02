@@ -3,10 +3,10 @@ import React from "react";
 
 const ReviewCard = ({ review }: { review: any }) => {
   return (
-    <article className="mb-6">
-      <div className="flex items-center mb-4 space-x-4">
+    <article className="mb-6 text-[#1E1E24]">
+      <div className="flex items-center mb-2 space-x-3 ">
         <Image
-          className="w-10 h-10 rounded-full"
+          className="w-10 h-10 rounded-full border-2 border-solid border-[#FFCF99]"
           src={
             review?.user?.profileImg
               ? review?.user?.profileImg
@@ -16,7 +16,7 @@ const ReviewCard = ({ review }: { review: any }) => {
           width={300}
           height={300}
         />
-        <div className="space-y-1 font-medium text-gray-800">
+        <div className="space-y-1 font-medium md:text-xl">
           <p>{review?.user?.name}</p>
         </div>
       </div>
@@ -35,7 +35,7 @@ const ReviewCard = ({ review }: { review: any }) => {
           )}
         </div>
       )}
-      <p className="mb-2 text-gray-600">{review?.review}</p>
+      <p className="mb-2 text-sm md:text-lg">{review?.review}</p>
     </article>
   );
 };

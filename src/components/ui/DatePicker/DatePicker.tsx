@@ -20,11 +20,14 @@ const DatePickerComponent = ({
 
   return (
     <div>
-      <div className="mb-2 text-lg">{label ? label : ""}</div>
+      <div className="mb-2 text-xl md:text-2xl text-[#92140C]">
+        {label ? label : ""}
+      </div>
       <DayPicker
         mode="single"
         selected={selectedDate}
         onSelect={setSelectedDate}
+        disabled={{ before: new Date() }}
       />
     </div>
   );

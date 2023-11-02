@@ -11,6 +11,8 @@ import { useRouter } from "next/navigation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signUpSchema } from "@/schema/auth";
 import Link from "next/link";
+import PrimaryButton from "@/components/ui/Button/PrimaryButton";
+import Heading from "@/components/ui/Heading/Heading";
 
 const SignUpPage = () => {
   const [signUp] = useSignUpMutation();
@@ -35,7 +37,7 @@ const SignUpPage = () => {
 
   return (
     <div>
-      <CommonHeading label="Create Your Account" />
+      <Heading label="Create an account" subLabel="Sign up" />
       <Form submitHandler={handleSubmit} resolver={yupResolver(signUpSchema)}>
         <div className="border border-black rounded flex flex-col w-2/3 lg:w-1/3 mx-auto">
           <FormInput
@@ -66,12 +68,12 @@ const SignUpPage = () => {
             placeholder="Your Address"
             label="Address"
           />
-          <Link href={"/login"} className="text-gray-700">
+          <Link href={"/login"} className="text-[#FFCF99] -mt-2">
             Already have an Account?
           </Link>
         </div>
         <div className="flex justify-center mt-3">
-          <SubmitButton label="Create Account" />
+          <PrimaryButton label="Create Account" type="submit" />
         </div>
       </Form>
     </div>

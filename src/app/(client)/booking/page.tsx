@@ -1,6 +1,7 @@
 "use client";
 import LoadingPage from "@/app/loading";
 import BookingDetails from "@/components/ui/Booking/BookingDetails";
+import HeadingStart from "@/components/ui/Heading/HeadingStart";
 import Modal from "@/components/ui/Modal/Modal";
 import {
   useCancelMyBookingMutation,
@@ -8,7 +9,6 @@ import {
 } from "@/redux/api/bookingApi";
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
-import { CiDatabase } from "react-icons/ci";
 
 const BookingsPage = () => {
   const [modalOpen, setModalOpen] = useState(true);
@@ -27,10 +27,11 @@ const BookingsPage = () => {
 
   return (
     <div>
+      <HeadingStart label="My Bookings" subLabel="Booked Services" />
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
-          <thead>
+          <thead className="text-[#92140c]">
             <tr>
               <th>Service</th>
               <th>Price</th>
@@ -80,7 +81,7 @@ const BookingsPage = () => {
                           <div className="flex justify-center mt-3">
                             <button
                               onClick={() => handleDeleteBooking(booking?.id)}
-                              className="btn btn-error btn-sm"
+                              className="btn btn-error rounded btn-sm"
                             >
                               Delete
                             </button>

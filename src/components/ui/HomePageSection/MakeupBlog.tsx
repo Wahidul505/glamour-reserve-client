@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import HomePageHeading from "./HomePageHeading";
+import Heading from "../Heading/Heading";
 import { useBlogsQuery } from "@/redux/api/blogApi";
 import LoadingPage from "@/app/loading";
 import BlogCard from "../Blog/BlogCard";
@@ -13,8 +13,8 @@ const MakeupBlog = () => {
 
   return (
     <div>
-      <HomePageHeading label="Makeup Blogs" subLabel="Our" />
-      <div className="bg-black lg:px-28 px-4 py-20 mb-8 lg:mb-12 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
+      <Heading label="Read Blogs" subLabel="Makeup trends" />
+      <div className="bg-[#1E1E24] md:px-12 px-4 py-10 md:py-20 mb-8 lg:mb-12 flex flex-wrap justify-center">
         {blogData &&
           blogData?.map((blog: any) => (
             <BlogCard key={blog.id} blog={blog} theme="dark" />

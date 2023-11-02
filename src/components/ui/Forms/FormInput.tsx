@@ -30,7 +30,9 @@ const FormInput = ({
 
   return (
     <div className="mb-5">
-      {label && <div className="mb-1"> {label ? label : ""}</div>}
+      {label && (
+        <div className="mb-1 text-sm md:text-base"> {label ? label : ""}</div>
+      )}
       <Controller
         control={control}
         name={name}
@@ -40,7 +42,7 @@ const FormInput = ({
             placeholder={placeholder}
             {...field}
             value={value ? value : field?.value}
-            className="input input-bordered w-11/12 rounded-none"
+            className="input focus:outline-none md:text-lg  w-11/12 rounded bg-transparent border-2 border-solid border-[#FFCF99]"
           />
         )}
       />

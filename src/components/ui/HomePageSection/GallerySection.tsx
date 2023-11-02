@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import HomePageHeading from "./HomePageHeading";
+import Heading from "../Heading/Heading";
 
 const GallerySection = () => {
   const images = [
@@ -14,8 +14,8 @@ const GallerySection = () => {
 
   return (
     <div>
-      <HomePageHeading label="Gallery" subLabel="Makeup" />
-      <div className="carousel carousel-center rounded-box">
+      <Heading label="Gallery" subLabel="Makeup" />
+      <div className="carousel w-full rounded">
         {images?.map((img: string, index: number) => (
           <div key={index} className="carousel-item">
             <Image src={img} alt="" width={300} height={300} className="" />

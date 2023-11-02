@@ -1,8 +1,8 @@
 "use client";
 import LoadingPage from "@/app/loading";
+import PrimaryButton from "@/components/ui/Button/PrimaryButton";
 import Form from "@/components/ui/Forms/Form";
 import FormInput from "@/components/ui/Forms/FormInput";
-import SubmitButton from "@/components/ui/Forms/SubmitButton";
 import Modal from "@/components/ui/Modal/Modal";
 import {
   useEditProfileMutation,
@@ -65,12 +65,12 @@ const ProfilePage = () => {
             alt=""
             width={300}
             height={300}
-            className="w-24 h-24 lg:w-56 lg:h-56"
+            className="w-24 h-24 lg:w-56 lg:h-56 rounded border-2 border-solid border-[#ffcf99]"
           />
         </div>
 
         {/* profile information  */}
-        <div className="lg:ml-10">
+        <div className="lg:ml-10 md:text-xl">
           <h1 className="font-normal">{data?.name}</h1>
           <p className="text-gray-700 mt-1 text-base">{data?.email}</p>
 
@@ -79,7 +79,7 @@ const ProfilePage = () => {
             <div className="text-lg ml-2">{data?.address}</div>
           </div>
 
-          <div className="flex items-center mt-2">
+          <div className="flex items-center mt-2 mb-3">
             <CiPhone className="text-xl" />
             <div className="text-lg ml-2">{data?.phone}</div>
           </div>
@@ -98,7 +98,7 @@ const ProfilePage = () => {
               resolver={yupResolver(profileSchema)}
               defaultValues={defaultValues}
             >
-              <div className="border border-black rounded flex flex-col w-5/6 mx-auto">
+              <div className="rounded flex flex-col w-5/6 mx-auto">
                 <FormInput
                   name="name"
                   type="text"
@@ -117,7 +117,7 @@ const ProfilePage = () => {
                 />
               </div>
               <div className="flex justify-center">
-                <SubmitButton label="Update" />
+                <PrimaryButton label="Update" type="submit" />
               </div>
             </Form>
           </Modal>

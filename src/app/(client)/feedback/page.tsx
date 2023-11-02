@@ -1,14 +1,14 @@
 "use client";
-import SubmitButton from "@/components/ui/Forms/SubmitButton";
 import Form from "@/components/ui/Forms/Form";
 import React from "react";
-import CommonHeading from "@/components/ui/Heading/CommonHeading";
 import { toast } from "react-hot-toast";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useSendFeedbackMutation } from "@/redux/api/feedbackApi";
 import { feedbackSchema } from "@/schema/feedback";
 import FormTextArea from "@/components/ui/Forms/FormTextArea";
 import { getUserInfo } from "@/services/auth.service";
+import HeadingStart from "@/components/ui/Heading/HeadingStart";
+import PrimaryButton from "@/components/ui/Button/PrimaryButton";
 
 const FeedbackPage = () => {
   const [sendFeedback] = useSendFeedbackMutation();
@@ -30,7 +30,7 @@ const FeedbackPage = () => {
 
   return (
     <div>
-      <CommonHeading label="Send Feedback to Us" />
+      <HeadingStart label="Send us your thoughts" subLabel="Feedback" />
       <Form submitHandler={handleSubmit} resolver={yupResolver(feedbackSchema)}>
         <div className="border border-black rounded flex flex-col mx-auto">
           <FormTextArea
@@ -41,7 +41,7 @@ const FeedbackPage = () => {
           />
         </div>
         <div className="">
-          <SubmitButton label="Submit" />
+          <PrimaryButton label="Submit" type="submit" />
         </div>
       </Form>
     </div>

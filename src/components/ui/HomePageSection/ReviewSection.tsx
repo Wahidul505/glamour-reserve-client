@@ -2,7 +2,7 @@
 import LoadingPage from "@/app/loading";
 import { useReviewsQuery } from "@/redux/api/reviewApi";
 import React from "react";
-import HomePageHeading from "./HomePageHeading";
+import Heading from "../Heading/Heading";
 import Image from "next/image";
 
 const ReviewSection = () => {
@@ -11,30 +11,48 @@ const ReviewSection = () => {
 
   return (
     <div>
-      <HomePageHeading label="Reviews" subLabel="client" />
-      <div className="carousel carousel-center rounded-box">
-        {data &&
-          data?.map((review: any) => (
-            <div
-              key={review?.id}
-              style={{ border: "1px solid black" }}
-              className="carousel-item mx-3 h-64 bg-gray-100 rounded p-6 w-80 flex flex-col items-center overflow-hidden"
-            >
-              <Image
-                src="https://i.ibb.co/277qX6m/161007137-818106462117352-2772674974349771071-n.jpg"
-                alt=""
-                width={300}
-                height={300}
-                className="w-12 h-12 rounded-full"
-              />
-              <h4 className="my-3">{review?.user?.name}</h4>
-              <div>
-                {review?.review?.length < 200
-                  ? review?.review
-                  : review?.review?.slice(0, 200) + "..."}
+      <Heading label="What Client Says" subLabel="Reviews" />
+
+      <div
+        style={{
+          backgroundImage: `url('https://i.ibb.co/PmF8gHS/element5-digital-ce-Wg-SMd8rv-Q-unsplash.jpg')`,
+        }}
+        className="h-72 md:h-96 w-full overflow-y-scroll bg-cover bg-fixed bg-center bg-no-repeat flex items-center rounded"
+      >
+        <div className="carousel w-full rounded">
+          {data &&
+            data?.map((review: any) => (
+              <div
+                key={review?.id}
+                className="carousel-item mx-3 md:h-60 bg-[#FFF8F0] text-[#1E1E24] rounded p-3 md:p-6 md:w-72 overflow-hidden grid grid-rows-3 h-44 w-56"
+              >
+                <div className="row-span-2">
+                  {review?.review?.length < 200
+                    ? review?.review
+                    : review?.review?.slice(0, 200) + "..."}
+                </div>
+                <div>
+                  <div className="border border-solid border-[#1E1E24] mb-3"></div>
+                  <div className="flex space-x-2  md:space-x-4 items-center">
+                    <Image
+                      className="w-10 h-10 rounded-full border-2 border-solid border-[#FFCF99]"
+                      src={
+                        review?.user?.profileImg
+                          ? review?.user?.profileImg
+                          : "https://i.ibb.co/6NdLWh8/5856.jpg"
+                      }
+                      alt=""
+                      width={300}
+                      height={300}
+                    />
+                    <div className="text-lg md:text-xl font-semibold">
+                      {review?.user?.name}
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+        </div>
       </div>
     </div>
   );

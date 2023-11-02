@@ -2,6 +2,7 @@
 import LoadingPage from "@/app/loading";
 import AdditionalInformation from "@/components/ui/AdditionalInformation/AdditionalInformation";
 import PrimaryButton from "@/components/ui/Button/PrimaryButton";
+import Heading from "@/components/ui/Heading/Heading";
 import Review from "@/components/ui/Review/Review";
 import { usePostReviewMutation } from "@/redux/api/reviewApi";
 import { useSingleServiceQuery } from "@/redux/api/serviceApi";
@@ -38,53 +39,51 @@ const ServiceDetailsPage = ({ params }: { params: any }) => {
 
   return (
     <div>
-      <div className="grid lg:grid-cols-2 grid-cols-1">
+      <Heading label={data?.title} subLabel="Makeover Service" />
+      <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-10 items-center justify-center md:mt-12">
         {/* image  */}
-        <div className="bg-black lg:px-8 lg:py-16 p-4 flex justify-center items-center pt-20">
-          <div>
-            <div className="overflow-hidden">
-              <Image
-                src={
-                  data?.image
-                    ? data?.image
-                    : "https://i.ibb.co/Kx0MBjW/161458103-804714766803585-5018531988672904671-n.jpg"
-                }
-                alt=""
-                width={500}
-                height={500}
-                className="hover:scale-105 transition-transform duration-700 ease-in-out"
-              />
-            </div>
-            <h2 className="text-gray-300 mt-4 uppercase">{data?.title}</h2>
-            <p className="text-gray-500 mt-3">{data?.category?.title}</p>
+        <div>
+          <div className="overflow-hidden">
+            <Image
+              src={
+                data?.image
+                  ? data?.image
+                  : "https://i.ibb.co/Kx0MBjW/161458103-804714766803585-5018531988672904671-n.jpg"
+              }
+              alt=""
+              height={500}
+              width={500}
+              className="border-2 border-solid border-[#FFCF99] p-5 rounded-full w-56 h-72 lg:w-80  lg:h-96"
+            />
           </div>
         </div>
 
         {/* details  */}
-        <div className="lg:p-8 p-4">
-          <h1 className="lg:text-4xl text-xl font-normal text-black uppercase">
-            {data?.title}
-          </h1>
-          <div className="text-gray-700 mt-3 text-lg lg:text-xl mb-5">
-            {data?.price} TK
-          </div>
-          <h4 className="text-xl">Details</h4>
-          <hr />
-          <div className="mt-3">
+        <div>
+          <div className="text-lg md:text-2xl text-[#92140C]">Details</div>
+          <div className="mt-1">
             {data?.information &&
               data?.information?.map((info: string, index: number) => (
-                <p key={index} className="lg:text-lg">
-                  • {info}
+                <p key={index} className="text-sm md:text-base">
+                  - {info}
                 </p>
               ))}
           </div>
-          <div className="flex mt-6 lg:mt-8">
-            <div
-              className="w-fit"
-              onClick={() => router.push(`/book/${data?.id}`)}
-            >
-              <PrimaryButton label="Book Now" />
-            </div>
+          <div className="text-lg md:text-2xl text-[#92140C] mt-3 md:mt-4">
+            Category
+          </div>
+          <p className="text-sm md:text-base">
+            {data?.category?.title ? data?.category?.title : ""}
+          </p>
+          <div className="text-lg md:text-2xl text-[#92140C] mt-3 md:mt-4">
+            Price
+          </div>
+          <p className="text-sm md:text-base">{data?.price} TK</p>
+          <div
+            className="w-fit mt-3 md:mt-4"
+            onClick={() => router.push(`/book/${data?.id}`)}
+          >
+            <PrimaryButton label="Book Now" />
           </div>
         </div>
       </div>
@@ -92,16 +91,16 @@ const ServiceDetailsPage = ({ params }: { params: any }) => {
       <div className="flex justify-center mt-12 lg:mt-20 mb-10">
         <button
           onClick={() => setLayout("additional-info")}
-          className={`mx-3 border-none bg-transparent text-lg lg:text-2xl uppercase cursor-pointer text-gray-700 ${
-            layout === "additional-info" && "underline"
+          className={`mx-3 border-none bg-transparent text-lg lg:text-2xl uppercase cursor-pointer text-[#1E1E24] ${
+            layout === "additional-info" && "text-[#92140C]"
           }`}
         >
           Additional Information
         </button>
         <button
           onClick={() => setLayout("review")}
-          className={`mx-3 border-none bg-transparent text-lg lg:text-2xl uppercase cursor-pointer text-gray-700 ${
-            layout === "review" && "underline"
+          className={`mx-3 border-none bg-transparent text-lg lg:text-2xl uppercase cursor-pointer text-[#1E1E24] ${
+            layout === "review" && "text-[#92140C]"
           }`}
         >
           Reviews
@@ -109,7 +108,7 @@ const ServiceDetailsPage = ({ params }: { params: any }) => {
       </div>
 
       {layout === "additional-info" && data?.category?.information && (
-        <div className="mt-3 lg:px-24 px-4">
+        <div className="mt-3 text-[#1E1E24]">
           <AdditionalInformation
             information={data?.category?.information}
             textSize="lg:text-lg text-base"
