@@ -63,7 +63,7 @@ const BookServicePage = ({ params }: { params: any }) => {
   return (
     <Redirect>
       <div>
-        <Heading label="Book your Service" subLabel="Booking" />
+        <Heading label={data?.title} subLabel="Book your service" />
         <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-10 items-center justify-center md:mt-12">
           {/* image  */}
           <div>
@@ -83,7 +83,7 @@ const BookServicePage = ({ params }: { params: any }) => {
           </div>
 
           {/* details  */}
-          <div>
+          <div className="w-full md:w-2/5 ">
             <div className="text-lg md:text-2xl text-[#92140C]">Details</div>
             <div className="mt-1">
               {data?.information &&
@@ -111,35 +111,43 @@ const BookServicePage = ({ params }: { params: any }) => {
           <Heading label="Provide Information" subLabel="Booking" />
           <Form submitHandler={handleSubmit} doReset={false}>
             <div className="flex flex-col items-center">
-              <DatePickerComponent
-                label="Pick a Date for booking"
-                selectedDate={selectedDate as Date}
-                setSelectedDate={setSelectedDate}
-              />
-              <div>
+              <div className="w-full md:w-2/3 lg:w-1/3">
+                <div className="mb-2 text-xl md:text-2xl text-[#92140C]">
+                  Pick a date for booking
+                </div>
+                <div className="flex justify-center">
+                  <DatePickerComponent
+                    selectedDate={selectedDate as Date}
+                    setSelectedDate={setSelectedDate}
+                  />
+                </div>
+              </div>
+              <div className="w-full md:w-2/3 lg:w-1/3">
                 <div className="mb-2 text-xl md:text-2xl text-[#92140C]">
                   Pick a time for booking
                 </div>
-                <select
-                  className="select w-56  md:w-72  rounded border border-solid border-[#FFCF99] focus:outline-none"
-                  onChange={(e) => setSlot(e?.target?.value)}
-                  disabled={!selectedDate}
-                >
-                  <option disabled selected>
-                    Pick a time slot
-                  </option>
-                  {availableSlots.map((option: any, index: number) => (
-                    <option
-                      key={index}
-                      value={JSON.stringify({
-                        startTime: option?.startTime,
-                        endTime: option?.endTime,
-                      })}
-                    >
-                      {option.startTime} - {option.endTime}
+                <div className="flex justify-center">
+                  <select
+                    className="select w-56  md:w-72  rounded border border-solid border-[#FFCF99] focus:outline-none"
+                    onChange={(e) => setSlot(e?.target?.value)}
+                    disabled={!selectedDate}
+                  >
+                    <option disabled selected>
+                      Pick a time slot
                     </option>
-                  ))}
-                </select>
+                    {availableSlots.map((option: any, index: number) => (
+                      <option
+                        key={index}
+                        value={JSON.stringify({
+                          startTime: option?.startTime,
+                          endTime: option?.endTime,
+                        })}
+                      >
+                        {option.startTime} - {option.endTime}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
               <div className="w-full mt-4 md:mt-10">
                 <div className="mb-2 text-xl md:text-2xl text-[#92140C]">

@@ -59,7 +59,7 @@ const ServiceDetailsPage = ({ params }: { params: any }) => {
         </div>
 
         {/* details  */}
-        <div>
+        <div className="w-full md:w-2/5 ">
           <div className="text-lg md:text-2xl text-[#92140C]">Details</div>
           <div className="mt-1">
             {data?.information &&
@@ -88,18 +88,18 @@ const ServiceDetailsPage = ({ params }: { params: any }) => {
         </div>
       </div>
 
-      <div className="flex justify-center mt-12 lg:mt-20 mb-10">
+      <div className="flex justify-center mt-12 lg:mt-20 mb-10 space-x-6 md:space-x-12">
         <button
           onClick={() => setLayout("additional-info")}
-          className={`mx-3 border-none bg-transparent text-lg lg:text-2xl uppercase cursor-pointer text-[#1E1E24] ${
+          className={`border-none bg-transparent text-lg lg:text-2xl uppercase cursor-pointer text-[#1E1E24] ${
             layout === "additional-info" && "text-[#92140C]"
           }`}
         >
-          Additional Information
+          Additional <br /> Information
         </button>
         <button
           onClick={() => setLayout("review")}
-          className={`mx-3 border-none bg-transparent text-lg lg:text-2xl uppercase cursor-pointer text-[#1E1E24] ${
+          className={`border-none bg-transparent text-lg lg:text-2xl uppercase cursor-pointer text-[#1E1E24] ${
             layout === "review" && "text-[#92140C]"
           }`}
         >

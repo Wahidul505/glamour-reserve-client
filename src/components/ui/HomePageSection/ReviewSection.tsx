@@ -27,9 +27,9 @@ const ReviewSection = () => {
                 className="carousel-item mx-3 md:h-60 bg-[#FFF8F0] text-[#1E1E24] rounded p-3 md:p-6 md:w-72 overflow-hidden grid grid-rows-3 h-44 w-56"
               >
                 <div className="row-span-2">
-                  {review?.review?.length < 200
+                  {review?.review?.length < 110
                     ? review?.review
-                    : review?.review?.slice(0, 200) + "..."}
+                    : review?.review?.slice(0, 110) + "..."}
                 </div>
                 <div>
                   <div className="border border-solid border-[#1E1E24] mb-3"></div>
