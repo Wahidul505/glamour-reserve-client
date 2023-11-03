@@ -20,6 +20,7 @@ import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Heading from "@/components/ui/Heading/Heading";
 import PrimaryButton from "@/components/ui/Button/PrimaryButton";
+import ServiceDetailsCard from "@/components/ui/Service/ServiceDetailsCard";
 
 const BookServicePage = ({ params }: { params: any }) => {
   const { serviceId } = params;
@@ -64,47 +65,7 @@ const BookServicePage = ({ params }: { params: any }) => {
     <Redirect>
       <div>
         <Heading label={data?.title} subLabel="Book your service" />
-        <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-10 items-center justify-center md:mt-12">
-          {/* image  */}
-          <div>
-            <div className="overflow-hidden">
-              <Image
-                src={
-                  data?.image
-                    ? data?.image
-                    : "https://i.ibb.co/Kx0MBjW/161458103-804714766803585-5018531988672904671-n.jpg"
-                }
-                alt=""
-                height={500}
-                width={500}
-                className="border-2 border-solid border-[#FFCF99] p-5 rounded-full w-56 h-72 lg:w-80  lg:h-96"
-              />
-            </div>
-          </div>
-
-          {/* details  */}
-          <div className="w-full md:w-2/5 ">
-            <div className="text-lg md:text-2xl text-[#92140C]">Details</div>
-            <div className="mt-1">
-              {data?.information &&
-                data?.information?.map((info: string, index: number) => (
-                  <p key={index} className="text-sm md:text-base">
-                    - {info}
-                  </p>
-                ))}
-            </div>
-            <div className="text-lg md:text-2xl text-[#92140C] mt-3 md:mt-4">
-              Category
-            </div>
-            <p className="text-sm md:text-base">
-              {data?.category?.title ? data?.category?.title : ""}
-            </p>
-            <div className="text-lg md:text-2xl text-[#92140C] mt-3 md:mt-4">
-              Price
-            </div>
-            <p className="text-sm md:text-base">{data?.price} TK</p>
-          </div>
-        </div>
+        <ServiceDetailsCard data={data} bookBtn={false} />
 
         {/* form  */}
         <div className="mt-8 md:mt-14">
@@ -122,8 +83,8 @@ const BookServicePage = ({ params }: { params: any }) => {
                   />
                 </div>
               </div>
-              <div className="w-full md:w-2/3 lg:w-1/3">
-                <div className="mb-2 text-xl md:text-2xl text-[#92140C]">
+              <div className="w-full md:w-2/3 lg:w-1/3 mt-5">
+                <div className="mb-3 text-xl md:text-2xl text-[#92140C]">
                   Pick a time for booking
                 </div>
                 <div className="flex justify-center">
@@ -149,8 +110,8 @@ const BookServicePage = ({ params }: { params: any }) => {
                   </select>
                 </div>
               </div>
-              <div className="w-full mt-4 md:mt-10">
-                <div className="mb-2 text-xl md:text-2xl text-[#92140C]">
+              <div className="w-full mt-8 md:mt-12">
+                <div className="mb-3 text-xl md:text-2xl text-[#92140C]">
                   Give Your Information
                 </div>
                 <FormInput name="contactNo" label="Contact Number" />
