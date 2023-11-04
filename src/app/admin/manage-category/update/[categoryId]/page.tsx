@@ -40,6 +40,7 @@ const UpdateCategoryPage = ({ params }: { params: any }) => {
       toast.error("Add Information");
       return;
     }
+    console.log(data);
     const res = await updateCategory({
       id: categoryData?.id,
       payload: data,
@@ -61,6 +62,7 @@ const UpdateCategoryPage = ({ params }: { params: any }) => {
           defaultValues={defaultValues}
         >
           <FormInput name="title" label="Title" placeholder="Category Title" />
+          <FormInput name="image" label="Image" placeholder="Image URL" />
           <div className="mb-1">Information</div>
           {contentInputs?.map((order) => (
             <div key={order}>

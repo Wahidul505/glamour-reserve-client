@@ -23,11 +23,11 @@ const CapsuleBanner = () => {
       <div>
         <div className="overflow-hidden ">
           <Image
-            src="https://i.ibb.co/VH7p5rZ/161018501-270327164650205-2623597865623769501-n.jpg"
+            src="https://i.ibb.co/GkWdWWh/Beauty-Test-Model-Sonia-Ben-Ammar-Test-Drives-4-Minimal-Makeup-Looks.jpg"
             alt=""
             height={350}
             width={350}
-            className="border-2 border-solid border-[#FFCF99] p-5 rounded-full w-64 h-72 lg:w-auto lg:h-auto"
+            className="border-2 border-solid border-[#FFCF99] p-5 rounded-full w-64 h-72 lg:w-80 lg:h-96"
           />
         </div>
       </div>

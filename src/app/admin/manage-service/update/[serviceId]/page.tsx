@@ -80,6 +80,7 @@ const UpdateServicePage = ({ params }: { params: any }) => {
           defaultValues={defaultValues}
         >
           <FormInput name="title" label="Title" placeholder="Service Title" />
+          <FormInput name="image" label="Image" placeholder="Image URL" />
           <FormInput name="price" label="Price" placeholder="Service Price" />
           <FormSelectInput
             name="categoryId"
