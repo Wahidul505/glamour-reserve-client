@@ -14,7 +14,7 @@ const MakeupBlog = () => {
   return (
     <div>
       <Heading label="Read Blogs" subLabel="Makeup trends" />
-      <div className="bg-[#1E1E24] md:px-12 px-4 py-10 md:py-20 mb-8 lg:mb-12 flex flex-wrap justify-center">
+      <div className="bg-[#1E1E24] md:px-12 px-4 py-10 md:py-20 mb-8 lg:mb-12 flex flex-wrap justify-center rounded">
         {blogData &&
           blogData?.map((blog: any) => (
             <BlogCard key={blog.id} blog={blog} theme="dark" />

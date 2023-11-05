@@ -20,7 +20,7 @@ const BlogCard = ({ blog, theme }: IProps) => {
           alt=""
           width={300}
           height={300}
-          className="hover:scale-105 transition-transform duration-700 ease-in-out rounded"
+          className="hover:scale-105 transition-transform duration-700 ease-in-out rounded w-56 md:w-64 lg:w-72"
         />
       </div>
       <div

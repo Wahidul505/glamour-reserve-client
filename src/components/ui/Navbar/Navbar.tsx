@@ -207,21 +207,48 @@ const Navbar = ({ sidebar }: IProps) => {
                     ))}
                   {/* center items  */}
                   {commonCenterItems &&
-                    commonCenterItems?.map((item) => (
-                      <li
-                        className={`${
-                          path == item?.href ? "active" : ""
-                        } lg:hidden`}
-                        key={item?.href}
-                      >
-                        <Link
-                          href={item?.href}
-                          className="no-underline text-lg text-[#1e1e24]"
+                    commonCenterItems?.map((item) =>
+                      !item?.dropdown ? (
+                        <li
+                          className={`${
+                            path == item?.href ? "active" : ""
+                          } lg:hidden`}
+                          key={item?.href}
                         >
-                          {item?.label}
-                        </Link>
-                      </li>
-                    ))}
+                          <Link
+                            href={item?.href}
+                            className="no-underline text-lg text-[#1e1e24]"
+                          >
+                            {item?.label}
+                          </Link>
+                        </li>
+                      ) : (
+                        <div
+                          key={item?.href}
+                          className="dropdown dropdown-hover"
+                        >
+                          <li className="text-lg text-[#1e1e24]">
+                            <label tabIndex={0}>{item?.label}</label>
+                          </li>
+                          <ul
+                            tabIndex={0}
+                            className="dropdown-content z-30 menu p-1 shadow bg-[#FFF8F0] rounded w-fit"
+                          >
+                            {data &&
+                              data?.map((category: any) => (
+                                <li key={category?.id}>
+                                  <Link
+                                    href={`/package/${category?.id}`}
+                                    className="no-underline text-xs md:text-sm text-[#1e1e24] mx-1 whitespace-nowrap"
+                                  >
+                                    {category?.title}
+                                  </Link>
+                                </li>
+                              ))}
+                          </ul>
+                        </div>
+                      )
+                    )}
                   <>
                     {currentUser.id && (
                       <button
