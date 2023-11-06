@@ -3,7 +3,6 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { CgClose } from "react-icons/cg";
-
 import React, { useEffect, useState } from "react";
 import { getUserInfo, removeUserInfo } from "@/services/auth.service";
 import { authKey } from "@/constants/authToken";
@@ -121,7 +120,7 @@ const Navbar = ({ sidebar }: IProps) => {
             <div className="drawer-content flex justify-end pr-4">
               {/* Page content here */}
               <label htmlFor="my-drawer-4" className="drawer-button">
-                <RxHamburgerMenu className="text-3xl cursor-pointer text-[#1e1e24]" />
+                <RxHamburgerMenu className="text-xl md:text-2xl cursor-pointer text-[#1e1e24]" />
               </label>
             </div>
             <div className="drawer-side">
@@ -207,8 +206,8 @@ const Navbar = ({ sidebar }: IProps) => {
                     ))}
                   {/* center items  */}
                   {commonCenterItems &&
-                    commonCenterItems?.map((item) =>
-                      !item?.dropdown ? (
+                    commonCenterItems?.map((item) => {
+                      return !item?.dropdown ? (
                         <li
                           className={`${
                             path == item?.href ? "active" : ""
@@ -225,7 +224,7 @@ const Navbar = ({ sidebar }: IProps) => {
                       ) : (
                         <div
                           key={item?.href}
-                          className="dropdown dropdown-hover"
+                          className="dropdown dropdown-hover lg:hidden"
                         >
                           <li className="text-lg text-[#1e1e24]">
                             <label tabIndex={0}>{item?.label}</label>
@@ -247,8 +246,8 @@ const Navbar = ({ sidebar }: IProps) => {
                               ))}
                           </ul>
                         </div>
-                      )
-                    )}
+                      );
+                    })}
                   <>
                     {currentUser.id && (
                       <button

@@ -28,13 +28,13 @@ const ServiceCard = ({ service, theme, categoryTitle = false }: IProps) => {
         className="h-full w-full"
       />
 
-      <div className="opacity-0 group-hover:opacity-100 flex absolute top-0 right-0 left-0 w-full h-full bg-black bg-opacity-70  justify-center items-center flex-col space-y-2 text-lg md:text-xl p-2 transition-opacity duration-300 ease-in-out">
-        <div className="uppercase text-[#FFF8F0] text-center whitespace-pre-wrap">
+      <div className="opacity-100 lg:opacity-0 lg:group-hover:opacity-100 flex absolute top-0 right-0 left-0 w-full h-full bg-black bg-opacity-70  justify-center items-center flex-col space-y-2 text-lg md:text-xl transition-opacity duration-300 ease-in-out">
+        <div className="uppercase text-[#FFF8F0] text-center whitespace-pre-wrap px-2">
           {service?.title}
         </div>
         <div className="uppercase text-[#FFF8F0] text-center">
           <span className="text-[#ffcf99]">TK </span>
-          {service?.price}
+          {service?.price} /=
         </div>
       </div>
     </div>

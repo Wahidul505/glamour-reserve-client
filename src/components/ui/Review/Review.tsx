@@ -22,10 +22,13 @@ const Review = ({
   const ratingsArray = [1, 2, 3, 4, 5];
   return (
     <div className="">
-      {reviewAndRatings &&
+      {reviewAndRatings && reviewAndRatings?.length < 1 ? (
+        <div className="md:text-xl">No Reviews Posted Yet</div>
+      ) : (
         reviewAndRatings?.map((review: any) => (
           <ReviewCard key={review?.id} review={review} />
-        ))}
+        ))
+      )}
 
       <div>
         {userId && (
