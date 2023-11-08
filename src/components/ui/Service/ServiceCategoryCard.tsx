@@ -12,7 +12,7 @@ const ServiceCategoryCard = ({ category }: IProps) => {
   return (
     <div
       onClick={() => router.push(`/package/${category?.id}`)}
-      className="m-3 cursor-pointer rounded overflow-hidden w-64 h-64  md:h-80 md:w-80 group relative hover:scale-95 transition-transform duration-300 ease-in-out"
+      className="m-3 cursor-pointer rounded overflow-hidden w-64 h-64 lg:h-72 xl:h-80  md:w-auto group relative hover:scale-95 transition-transform duration-300 ease-in-out"
     >
       <Image
         src={

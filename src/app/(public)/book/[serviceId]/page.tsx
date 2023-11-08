@@ -21,6 +21,7 @@ import { useRouter } from "next/navigation";
 import Heading from "@/components/ui/Heading/Heading";
 import PrimaryButton from "@/components/ui/Button/PrimaryButton";
 import ServiceDetailsCard from "@/components/ui/Service/ServiceDetailsCard";
+import { useProfileQuery } from "@/redux/api/profileApi";
 
 const BookServicePage = ({ params }: { params: any }) => {
   const { serviceId } = params;
@@ -31,12 +32,15 @@ const BookServicePage = ({ params }: { params: any }) => {
   const { data: slotData, isLoading: isSlotLoading } = useBookingsByDateQuery(
     selectedDate && format(selectedDate, "yyyy-MM-dd")
   );
+  const { data: userData, isLoading: isUserLoading } = useProfileQuery(userId);
   const [bookService] = useBookServiceMutation();
   const router = useRouter();
 
-  if (isLoading || isSlotLoading) return <LoadingPage />;
+  if (isLoading || isSlotLoading || isUserLoading) return <LoadingPage />;
 
   const handleSubmit = async (data: any) => {
+    delete data?.name;
+    delete data?.email;
     if (!slot) {
       toast.error("Please select a Slot for booking");
       return;
@@ -69,51 +73,63 @@ const BookServicePage = ({ params }: { params: any }) => {
 
         {/* form  */}
         <div className="mt-8 md:mt-14">
-          <Heading label="Provide Information" subLabel="Booking" />
+          <Heading
+            label="Select Booking Slot & Provide Information"
+            subLabel="Booking"
+          />
           <Form submitHandler={handleSubmit} doReset={false}>
-            <div className="flex flex-col items-center">
-              <div className="w-full md:w-2/3 lg:w-1/3">
+            <div className="grid grid-cols-1 md:grid-cols-2 items-start justify-start space-y-8 md:space-y-0">
+              <div className="">
                 <div className="mb-2 text-xl md:text-2xl text-[#92140C]">
                   Pick a date for booking
                 </div>
-                <div className="flex justify-center">
-                  <DatePickerComponent
-                    selectedDate={selectedDate as Date}
-                    setSelectedDate={setSelectedDate}
-                  />
-                </div>
-              </div>
-              <div className="w-full md:w-2/3 lg:w-1/3 mt-5">
+
+                <DatePickerComponent
+                  selectedDate={selectedDate as Date}
+                  setSelectedDate={setSelectedDate}
+                />
+
                 <div className="mb-3 text-xl md:text-2xl text-[#92140C]">
                   Pick a time for booking
                 </div>
-                <div className="flex justify-center">
-                  <select
-                    className="select w-56  md:w-72  rounded border border-solid border-[#FFCF99] focus:outline-none"
-                    onChange={(e) => setSlot(e?.target?.value)}
-                    disabled={!selectedDate}
-                  >
-                    <option disabled selected>
-                      Pick a time slot
+
+                <select
+                  className="select w-56  md:w-72  rounded border border-solid border-[#FFCF99] focus:outline-none"
+                  onChange={(e) => setSlot(e?.target?.value)}
+                  disabled={!selectedDate}
+                >
+                  <option disabled selected>
+                    Pick a time slot
+                  </option>
+                  {availableSlots.map((option: any, index: number) => (
+                    <option
+                      key={index}
+                      value={JSON.stringify({
+                        startTime: option?.startTime,
+                        endTime: option?.endTime,
+                      })}
+                    >
+                      {option.startTime} - {option.endTime}
                     </option>
-                    {availableSlots.map((option: any, index: number) => (
-                      <option
-                        key={index}
-                        value={JSON.stringify({
-                          startTime: option?.startTime,
-                          endTime: option?.endTime,
-                        })}
-                      >
-                        {option.startTime} - {option.endTime}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                  ))}
+                </select>
               </div>
-              <div className="w-full mt-8 md:mt-12">
-                <div className="mb-3 text-xl md:text-2xl text-[#92140C]">
+              <div className="">
+                <div className="mb-3 md:mb-5 text-xl md:text-2xl text-[#92140C]">
                   Give Your Information
                 </div>
+                <FormInput
+                  name="name"
+                  label="Your Name"
+                  disabled={true}
+                  value={userData?.name}
+                />
+                <FormInput
+                  name="email"
+                  label="Email Address"
+                  disabled={true}
+                  value={userData?.email}
+                />
                 <FormInput name="contactNo" label="Contact Number" />
                 <FormInput
                   name="alternativeContactNo"
