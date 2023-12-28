@@ -30,7 +30,7 @@ const Footer = () => {
           <div className="md:text-lg">
             #01, A block, Shugandha, Muradpur, Chittagong, Bangladesh
           </div>
-          <div className="md:text-lg text-[#FFCF99] mt-3 md:mt-4">
+          <div className="md:text-lg text-gray-600 mt-3 md:mt-4">
             +880-181XXXXXXX
           </div>
         </div>

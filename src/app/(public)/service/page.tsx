@@ -40,7 +40,7 @@ const ServicePage = () => {
             type="text"
             name="search"
             placeholder="Search"
-            className="border-solid border-2 rounded border-[#ffcf99] bg-transparent h-10 focus:outline-none px-2 text-lg w-52 md:w-96"
+            className="border-solid border-2 rounded border-gray-600 bg-transparent h-10 focus:outline-none px-2 text-lg w-52 md:w-96"
             onChange={(e) => setSearchTerm(e.target.value)}
           />
 

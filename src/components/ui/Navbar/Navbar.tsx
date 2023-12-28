@@ -48,7 +48,7 @@ const Navbar = ({ sidebar }: IProps) => {
   if (isLoading || isDataLoading) return <LoadingPage />;
 
   return (
-    <div className="px-3 md:px-12 bg-[#fff8f0] fixed right-0 left-0 top-0 z-50 shadow-lg">
+    <div className="px-3 md:px-12 bg-[#fff8f0] fixed right-0 left-0 top-0 z-50 shadow">
       <div className="navbar bg-[#fff8f0]">
         {/* mobile device  */}
         <div className="navbar-start">

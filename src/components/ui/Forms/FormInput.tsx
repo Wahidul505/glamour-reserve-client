@@ -45,7 +45,7 @@ const FormInput = ({
             {...field}
             value={value ? value : field?.value}
             disabled={disabled}
-            className="input focus:outline-none md:text-lg  w-11/12 rounded bg-transparent border-2 border-solid border-[#FFCF99]"
+            className="input focus:outline-none md:text-lg  w-full rounded bg-transparent border border-solid border-gray-600 box-border"
           />
         )}
       />

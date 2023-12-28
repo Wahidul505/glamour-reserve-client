@@ -1,4 +1,5 @@
 import React from "react";
+import { LuCheckSquare } from "react-icons/lu";
 
 interface IProps {
   information: string[];
@@ -10,8 +11,8 @@ const AdditionalInformation = ({ information, textSize }: IProps) => {
     <div>
       {information &&
         information?.map((info: string, index: number) => (
-          <p key={index} className={textSize}>
-            - {info}
+          <p key={index} className={`${textSize} flex items-center`}>
+            <LuCheckSquare className="mr-2" /> {info}
           </p>
         ))}
     </div>

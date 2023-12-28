@@ -13,7 +13,7 @@ const Banner = () => {
             width={500}
             className="shape w-52 h-52 md:w-72 lg:w-96 md:h-72 lg:h-96"
           />
-          <div className="text-4xl md:text-5xl lg:text-7xl text-[#92140C] font-heading">
+          <div className="text-4xl md:text-5xl lg:text-8xl text-[#92140C] font-thin">
             <div>Makeover</div>{" "}
             <div className="md:ml-8">
               that you <br />

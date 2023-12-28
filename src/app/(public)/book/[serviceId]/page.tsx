@@ -22,6 +22,10 @@ import Heading from "@/components/ui/Heading/Heading";
 import PrimaryButton from "@/components/ui/Button/PrimaryButton";
 import ServiceDetailsCard from "@/components/ui/Service/ServiceDetailsCard";
 import { useProfileQuery } from "@/redux/api/profileApi";
+import InfoHeading from "@/components/ui/Info/InfoHeading";
+import { LuCheckSquare } from "react-icons/lu";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { bookingSchema } from "@/schema/booking";
 
 const BookServicePage = ({ params }: { params: any }) => {
   const { serviceId } = params;
@@ -67,80 +71,104 @@ const BookServicePage = ({ params }: { params: any }) => {
 
   return (
     <Redirect>
-      <div>
-        <Heading label={data?.title} subLabel="Book your service" />
-        <ServiceDetailsCard data={data} bookBtn={false} />
+      <Form
+        submitHandler={handleSubmit}
+        doReset={false}
+        resolver={yupResolver(bookingSchema)}
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          <div className="m-4 lg:m-5 border border-solid border-gray-500 rounded-2xl p-3 lg:p-4">
+            <InfoHeading serial={1} label="Booking Overview" />
+            <div className="text-lg md:text-2xl text-[#92140C]">Service</div>
+            <div className="font-bold mt-1">{data?.title}</div>
+            <div className="text-lg md:text-2xl text-[#92140C] mt-3 md:mt-4">
+              Details
+            </div>
+            <div className="mt-1">
+              {data?.information &&
+                data?.information?.map((info: string, index: number) => (
+                  <p
+                    key={index}
+                    className="text-sm md:text-base flex items-center"
+                  >
+                    <LuCheckSquare className="mr-2" /> {info}
+                  </p>
+                ))}
+            </div>
+            <div className="text-lg md:text-2xl text-[#92140C] mt-3 md:mt-4">
+              Category
+            </div>
+            <p className="text-sm md:text-base">
+              {data?.category?.title ? data?.category?.title : ""}
+            </p>
+          </div>
 
-        {/* form  */}
-        <div className="mt-8 md:mt-14">
-          <Heading
-            label="Select Booking Slot & Provide Information"
-            subLabel="Booking"
-          />
-          <Form submitHandler={handleSubmit} doReset={false}>
-            <div className="grid grid-cols-1 md:grid-cols-2 items-start justify-start space-y-8 md:space-y-0">
-              <div className="">
-                <div className="mb-2 text-xl md:text-2xl text-[#92140C]">
-                  Pick a date for booking
-                </div>
-
-                <DatePickerComponent
-                  selectedDate={selectedDate as Date}
-                  setSelectedDate={setSelectedDate}
-                />
-
-                <div className="mb-3 text-xl md:text-2xl text-[#92140C]">
-                  Pick a time for booking
-                </div>
-
-                <select
-                  className="select w-56  md:w-72  rounded border border-solid border-[#FFCF99] focus:outline-none"
-                  onChange={(e) => setSlot(e?.target?.value)}
-                  disabled={!selectedDate}
+          <div className=" m-4 lg:m-5 border border-solid border-gray-500 rounded-2xl p-3 lg:p-4">
+            <InfoHeading serial={2} label="Pick Booking Date" />
+            <DatePickerComponent
+              selectedDate={selectedDate as Date}
+              setSelectedDate={setSelectedDate}
+            />
+          </div>
+          <div className="m-4 lg:m-5 border border-solid border-gray-500 rounded-2xl p-3 lg:p-4">
+            <InfoHeading serial={3} label="Pick Booking Slot" />
+            <select
+              className="select w-full box-border bg-transparent  rounded border border-solid border-gray-600 focus:outline-none"
+              onChange={(e) => setSlot(e?.target?.value)}
+              disabled={!selectedDate}
+            >
+              <option disabled selected>
+                Pick a time slot
+              </option>
+              {availableSlots.map((option: any, index: number) => (
+                <option
+                  key={index}
+                  value={JSON.stringify({
+                    startTime: option?.startTime,
+                    endTime: option?.endTime,
+                  })}
                 >
-                  <option disabled selected>
-                    Pick a time slot
-                  </option>
-                  {availableSlots.map((option: any, index: number) => (
-                    <option
-                      key={index}
-                      value={JSON.stringify({
-                        startTime: option?.startTime,
-                        endTime: option?.endTime,
-                      })}
-                    >
-                      {option.startTime} - {option.endTime}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="">
-                <div className="mb-3 md:mb-5 text-xl md:text-2xl text-[#92140C]">
-                  Give Your Information
-                </div>
-                <FormInput
-                  name="name"
-                  label="Your Name"
-                  disabled={true}
-                  value={userData?.name}
-                />
-                <FormInput
-                  name="email"
-                  label="Email Address"
-                  disabled={true}
-                  value={userData?.email}
-                />
-                <FormInput name="contactNo" label="Contact Number" />
-                <FormInput
-                  name="alternativeContactNo"
-                  label="Alternative Contact Number"
-                />
-                <PrimaryButton label="Book" type="submit" />
+                  {option.startTime} - {option.endTime}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className=" m-4 lg:m-5 border border-solid border-gray-500 rounded-2xl p-3 lg:p-4">
+            <InfoHeading serial={4} label="Client Information" />
+            <FormInput
+              name="name"
+              label="Your Name"
+              disabled={true}
+              value={userData?.name}
+            />
+            <FormInput
+              name="email"
+              label="Email Address"
+              disabled={true}
+              value={userData?.email}
+            />
+            <FormInput name="contactNo" label="Contact Number" />
+            <FormInput
+              name="alternativeContactNo"
+              label="Alternative Contact Number"
+            />
+          </div>
+
+          <div className=" m-4 lg:m-5 border border-solid border-gray-500 rounded-2xl p-3 lg:p-4">
+            <InfoHeading serial={5} label="Price Summary" />
+            <div className="flex items-start justify-between text-base md:text-lg lg:text-xl">
+              <div className="font-bold">Total</div>
+              <div className="text-end">
+                <div className="font-bold">BDT {data?.price}</div>
+                <div>Includes taxes and charges</div>
               </div>
             </div>
-          </Form>
+          </div>
+          <div className="mt-2 md:mt-4 flex justify-end mr-4">
+            <PrimaryButton label="Book" type="submit" />
+          </div>
         </div>
-      </div>
+      </Form>
     </Redirect>
   );
 };

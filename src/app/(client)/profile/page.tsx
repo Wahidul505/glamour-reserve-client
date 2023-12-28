@@ -65,7 +65,7 @@ const ProfilePage = () => {
             alt=""
             width={300}
             height={300}
-            className="w-24 h-24 lg:w-56 lg:h-56 rounded border-2 border-solid border-[#ffcf99]"
+            className="w-24 h-24 lg:w-56 lg:h-56 rounded border-2 border-solid border-gray-600"
           />
         </div>
 

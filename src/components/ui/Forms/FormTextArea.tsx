@@ -41,7 +41,7 @@ const FormTextArea = ({
             placeholder={placeholder}
             {...field}
             value={value ? value : field?.value}
-            className={`h-20 p-2 md:text-lg w-11/12 md:w-full rounded bg-transparent border-2 border-solid border-[#FFCF99] focus:outline-none${
+            className={`h-20 p-2 md:text-lg w-11/12 md:w-full rounded bg-transparent border-2 border-solid border-gray-600 focus:outline-none${
               size === "lg" ? "textarea-lg" : "textarea-md"
             }`}
           />

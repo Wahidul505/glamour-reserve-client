@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import PrimaryButton from "../Button/PrimaryButton";
 import { useRouter } from "next/navigation";
+import { LuCheckSquare } from "react-icons/lu";
 
 const ServiceDetailsCard = ({
   data,
@@ -26,7 +27,7 @@ const ServiceDetailsCard = ({
             alt=""
             height={500}
             width={500}
-            className="border-2 border-solid border-[#FFCF99] p-5 rounded-full w-56 h-72 lg:w-80  lg:h-96"
+            className="border-2 border-solid border-gray-600 p-5 rounded-full w-56 h-72 lg:w-80  lg:h-96"
           />
         </div>
       </div>
@@ -37,8 +38,8 @@ const ServiceDetailsCard = ({
         <div className="mt-1">
           {data?.information &&
             data?.information?.map((info: string, index: number) => (
-              <p key={index} className="text-sm md:text-base">
-                - {info}
+              <p key={index} className="text-sm md:text-base flex items-center">
+                <LuCheckSquare className="mr-2" /> {info}
               </p>
             ))}
         </div>
@@ -51,7 +52,7 @@ const ServiceDetailsCard = ({
         <div className="text-lg md:text-2xl text-[#92140C] mt-3 md:mt-4">
           Price
         </div>
-        <p className="text-sm md:text-base">{data?.price} TK</p>
+        <p className="text-sm md:text-base">BDT {data?.price}/=</p>
         {bookBtn && (
           <div
             className="w-fit mt-3 md:mt-4"

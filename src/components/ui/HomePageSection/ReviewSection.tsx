@@ -35,7 +35,7 @@ const ReviewSection = () => {
                   <div className="border border-solid border-[#1E1E24] mb-3"></div>
                   <div className="flex space-x-2  md:space-x-4 items-center">
                     <Image
-                      className="w-10 h-10 rounded-full border-2 border-solid border-[#FFCF99]"
+                      className="w-10 h-10 rounded-full border-2 border-solid border-gray-600"
                       src={
                         review?.user?.profileImg
                           ? review?.user?.profileImg

@@ -12,7 +12,7 @@ const ServiceCategoryCard = ({ category }: IProps) => {
   return (
     <div
       onClick={() => router.push(`/package/${category?.id}`)}
-      className="m-3 cursor-pointer rounded overflow-hidden w-64 h-64 lg:h-72 xl:h-80  md:w-auto group relative hover:scale-95 transition-transform duration-300 ease-in-out"
+      className="m-3 cursor-pointer rounded overflow-hidden w-64 h-64 lg:h-72 xl:h-80 lg:w-72 xl:w-96 md:w-auto group relative hover:scale-95 transition-transform duration-300 ease-in-out"
     >
       <Image
         src={
@@ -26,8 +26,8 @@ const ServiceCategoryCard = ({ category }: IProps) => {
         className="h-full w-full"
       />
 
-      <div className="opacity-100 lg:opacity-0  lg:group-hover:opacity-100 flex absolute top-0 right-0 left-0 w-full h-full bg-black bg-opacity-70  justify-center items-center flex-col space-y-2 text-lg md:text-xl p-2 transition-opacity duration-300 ease-in-out">
-        <div className="uppercase text-[#FFF8F0] text-center whitespace-pre-wrap">
+      <div className="opacity-100 lg:opacity-0  lg:group-hover:opacity-100 flex absolute top-0 right-0 left-0 w-full h-full bg-black bg-opacity-70  justify-center items-center flex-col space-y-2 text-lg md:text-xl transition-opacity duration-300 ease-in-out">
+        <div className="uppercase text-[#FFF8F0] text-center whitespace-pre-wrap p-2">
           {category?.title}
         </div>
       </div>

@@ -6,7 +6,7 @@ const ReviewCard = ({ review }: { review: any }) => {
     <article className="mb-6 text-[#1E1E24]">
       <div className="flex items-center mb-2 space-x-3 ">
         <Image
-          className="w-10 h-10 rounded-full border-2 border-solid border-[#FFCF99]"
+          className="w-10 h-10 rounded-full border-2 border-solid border-gray-600"
           src={
             review?.user?.profileImg
               ? review?.user?.profileImg

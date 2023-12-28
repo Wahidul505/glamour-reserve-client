@@ -33,7 +33,7 @@ const ServiceCard = ({ service, theme, categoryTitle = false }: IProps) => {
           {service?.title}
         </div>
         <div className="uppercase text-[#FFF8F0] text-center">
-          <span className="text-[#ffcf99]">TK </span>
+          <span className="text-gray-600">BDT </span>
           {service?.price} /=
         </div>
       </div>

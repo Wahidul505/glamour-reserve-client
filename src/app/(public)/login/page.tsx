@@ -1,9 +1,7 @@
 "use client";
-import SubmitButton from "@/components/ui/Forms/SubmitButton";
 import Form from "@/components/ui/Forms/Form";
 import FormInput from "@/components/ui/Forms/FormInput";
-import React from "react";
-import CommonHeading from "@/components/ui/Heading/CommonHeading";
+import React, { useState } from "react";
 import { useSignInMutation } from "@/redux/api/authApi";
 import { useRouter } from "next/navigation";
 import { storeUserInfo } from "@/services/auth.service";
@@ -13,10 +11,13 @@ import { loginSchema } from "@/schema/auth";
 import Link from "next/link";
 import Heading from "@/components/ui/Heading/Heading";
 import PrimaryButton from "@/components/ui/Button/PrimaryButton";
+import Modal from "@/components/ui/Modal/Modal";
+import QuickLoginInfo from "@/components/ui/Info/QuickLoginInfo";
 
 const LoginPage = () => {
   const [signIn] = useSignInMutation();
   const router = useRouter();
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleSubmit = async (data: any) => {
     try {
@@ -36,10 +37,10 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
+    <div className=" relative">
       <Heading label="Login to your account" subLabel="Login" />
       <Form submitHandler={handleSubmit} resolver={yupResolver(loginSchema)}>
-        <div className=" flex flex-col w-2/3 lg:w-1/3 mx-auto">
+        <div className=" flex flex-col w-2/3 md:w-1/3 mx-auto">
           <FormInput
             name="email"
             type="email"
@@ -52,12 +53,22 @@ const LoginPage = () => {
             placeholder="Password"
             label="Password"
           />
-          <Link href={"/signUp"} className="text-[#FFCF99] -mt-2">
+          <Link href={"/signUp"} className="text-gray-600 -mt-2">
             New to Out Website?
           </Link>
-        </div>
-        <div className="flex justify-center mt-3">
-          <PrimaryButton label="Login" type="submit" />
+
+          <div className="flex justify-between mt-3 md:mt-5 items-center">
+            <Modal
+              htmlFor="quick-login"
+              modalOpen={modalOpen}
+              setModalOpen={setModalOpen}
+              btnSize="btn-md"
+              label="Quick Login"
+            >
+              <QuickLoginInfo />
+            </Modal>
+            <PrimaryButton label="Login" type="submit" />
+          </div>
         </div>
       </Form>
     </div>

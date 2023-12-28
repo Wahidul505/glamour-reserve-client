@@ -29,7 +29,7 @@ const FeaturedSection = () => {
             <ServiceCategoryCard key={category?.id} category={category} />
           ))}
       </Slider>
-      <div className="carousel w-full rounded border-solid border border-[#FFCF99] py-1 md:hidden">
+      <div className="carousel w-full rounded border-solid border border-gray-600 py-1 md:hidden">
         {data &&
           data?.map((category: any) => (
             <div key={category?.id} className="carousel-item">

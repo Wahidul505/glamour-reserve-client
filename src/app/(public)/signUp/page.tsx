@@ -68,7 +68,7 @@ const SignUpPage = () => {
             placeholder="Your Address"
             label="Address"
           />
-          <Link href={"/login"} className="text-[#FFCF99] -mt-2">
+          <Link href={"/login"} className="text-gray-600 -mt-2">
             Already have an Account?
           </Link>
         </div>
