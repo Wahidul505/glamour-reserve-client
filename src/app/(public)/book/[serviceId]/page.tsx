@@ -3,7 +3,6 @@ import LoadingPage from "@/app/loading";
 import DatePickerComponent from "@/components/ui/DatePicker/DatePicker";
 import Form from "@/components/ui/Forms/Form";
 import FormInput from "@/components/ui/Forms/FormInput";
-import SubmitButton from "@/components/ui/Forms/SubmitButton";
 import Redirect from "@/components/ui/Redirect/Redirect";
 import {
   useBookServiceMutation,
@@ -77,7 +76,7 @@ const BookServicePage = ({ params }: { params: any }) => {
         resolver={yupResolver(bookingSchema)}
       >
         <div className="grid grid-cols-1 md:grid-cols-2">
-          <div className="m-4 lg:m-5 border border-solid border-gray-500 rounded-2xl p-3 lg:p-4">
+          <div className="mb-2 md:m-3 lg:m-4 border border-solid border-gray-500 rounded-2xl p-3 lg:p-4">
             <InfoHeading serial={1} label="Booking Overview" />
             <div className="text-lg md:text-2xl text-[#92140C]">Service</div>
             <div className="font-bold mt-1">{data?.title}</div>
@@ -103,14 +102,14 @@ const BookServicePage = ({ params }: { params: any }) => {
             </p>
           </div>
 
-          <div className=" m-4 lg:m-5 border border-solid border-gray-500 rounded-2xl p-3 lg:p-4">
+          <div className=" mb-2 md:m-3 lg:m-4 border border-solid border-gray-500 rounded-2xl p-3 lg:p-4">
             <InfoHeading serial={2} label="Pick Booking Date" />
             <DatePickerComponent
               selectedDate={selectedDate as Date}
               setSelectedDate={setSelectedDate}
             />
           </div>
-          <div className="m-4 lg:m-5 border border-solid border-gray-500 rounded-2xl p-3 lg:p-4">
+          <div className="mb-2 md:m-3 lg:m-4 border border-solid border-gray-500 rounded-2xl p-3 lg:p-4">
             <InfoHeading serial={3} label="Pick Booking Slot" />
             <select
               className="select w-full box-border bg-transparent  rounded border border-solid border-gray-600 focus:outline-none"
@@ -133,7 +132,7 @@ const BookServicePage = ({ params }: { params: any }) => {
               ))}
             </select>
           </div>
-          <div className=" m-4 lg:m-5 border border-solid border-gray-500 rounded-2xl p-3 lg:p-4">
+          <div className=" mb-2 md:m-3 lg:m-4 border border-solid border-gray-500 rounded-2xl p-3 lg:p-4">
             <InfoHeading serial={4} label="Client Information" />
             <FormInput
               name="name"
@@ -154,7 +153,7 @@ const BookServicePage = ({ params }: { params: any }) => {
             />
           </div>
 
-          <div className=" m-4 lg:m-5 border border-solid border-gray-500 rounded-2xl p-3 lg:p-4">
+          <div className=" mb-2 md:m-3 lg:m-4 border border-solid border-gray-500 rounded-2xl p-3 lg:p-4">
             <InfoHeading serial={5} label="Price Summary" />
             <div className="flex items-start justify-between text-base md:text-lg lg:text-xl">
               <div className="font-bold">Total</div>
